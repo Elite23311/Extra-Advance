@@ -1,6 +1,11 @@
 --   loadstring(game:HttpGet("https://raw.githubusercontent.com/YOUR_USER/YOUR_REPO/main/Loader.lua"))()
 
-local RAW = "https://raw.githubusercontent.com/YOUR_USER/YOUR_REPO/main/"
+-- ─── GITHUB PAT CONFIGURATION ───────────────────────────────
+-- For PRIVATE repos: Generate PAT at github.com/settings/tokens
+-- Set YOUR_PAT_TOKEN below. For public repos, leave empty string.
+local PAT_TOKEN = ""  -- Paste your GitHub PAT here for private repos
+
+local RAW = "https://" .. (PAT_TOKEN ~= "" and PAT_TOKEN .. "@" or "") .. "raw.githubusercontent.com/Elite23311/Extra-Advance/main/"
 local repo = "https://raw.githubusercontent.com/violin-suzutsuki/LinoriaLib/main/"
 
 local Library      = loadstring(game:HttpGet(repo .. "Library.lua"))()
@@ -28,7 +33,7 @@ local GameRoutes = {
 }
 
 local Window = Library:CreateWindow({
-    Title       = "ScriptHub",
+    Title       = "Extra Advance",
     Center      = true,
     AutoShow    = true,
     TabPadding  = 8,
@@ -90,7 +95,7 @@ local wmConn = game:GetService("RunService").RenderStepped:Connect(function()
         fpsTimer = tick()
         fpsCounter = 0
     end
-    Library:SetWatermark(("ScriptHub  |  %d fps  |  %d ms"):format(
+    Library:SetWatermark(("Extra Advance On Top  |  %d fps  |  %d ms"):format(
         math.floor(fps),
         math.floor(game:GetService("Stats").Network.ServerStatsItem["Data Ping"]:GetValue())
     ))
@@ -107,8 +112,8 @@ SaveManager:SetLibrary(Library)
 SaveManager:IgnoreThemeSettings()
 SaveManager:SetIgnoreIndexes({ "MenuKeybind" })
 
-ThemeManager:SetFolder("ScriptHub")
-SaveManager:SetFolder("ScriptHub/" .. tostring(game.PlaceId))
+ThemeManager:SetFolder("ExtraAdvance")
+SaveManager:SetFolder("ExtraAdvance/" .. tostring(game.PlaceId))
 
 ThemeManager:ApplyToTab(Tabs["Settings"])
 SaveManager:BuildConfigSection(Tabs["Settings"])
