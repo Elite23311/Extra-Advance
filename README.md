@@ -1,102 +1,144 @@
-# Extra-Advance
+# Extra Advance - Universal Roblox Hacks Framework
 
-> Modular Roblox script hub using [LinoriaLib](https://github.com/violin-suzutsuki/LinoriaLib).  
-> Users run **one line**. Everything else loads automatically.
+A powerful, modular exploit framework for Roblox with universal hacks and game-specific modules. Built with advanced obfuscation for security and stability.
+
+## Features
+
+### Universal Hacks (All Games)
+
+#### Movement
+- **Fly** - Camera-relative flight with customizable speed
+- **Walk Speed** - Adjust player movement speed
+- **Jump Power** - Customize jump height
+- **TP Walk** - Teleport-based movement
+- **Infinite Jump** - Unlimited jumping ability
+
+#### Combat
+- **Aimbot** - Automatic aiming with FOV circle and smoothness control
+- **Silent Aimbot** - Aim without moving camera, includes shot chance and headshot chance
+- **Desync** - Raknet packet modification with visual indicator
+
+#### Visuals
+- **ESP** - Player rendering with:
+  - Chams (colored player bodies)
+  - Box ESP (bounding boxes)
+  - Health bars
+  - Skeleton display
+  - Distance counter
+  - Player names
+  - Team/Invisible/Health filters
+- **Fullbright** - Increase brightness
+- **XRay** - See through objects
+- **FPS Boost** - Optimize performance
+
+### Game-Specific Hacks
+
+#### Rivals (PlaceId: 17625359962)
+- **AimAssist** - Game-specific aiming enhancements
+
+## Installation
+
+### Method 1: Direct Load (Recommended)
+1. Open your Roblox executor (Synapse X, Script-Ware, etc.)
+2. Copy this command:
+```lua
+loadstring(game:HttpGet("https://raw.githubusercontent.com/YOUR_USERNAME/Extra-Advance/main/Loader.lua"))()
+```
+3. Execute in the game
+
+### Method 2: Copy Code
+1. Download `Loader.lua` from this repository
+2. Paste into your executor
+3. Execute
+
+## Usage
+
+### First Time Setup
+1. When you first load the script, you'll see a key validation window
+2. Use a valid authentication key
+3. The main GUI will appear once authenticated
+
+### Main GUI
+
+**Tabs:**
+- **Main** - Core hacks (Fly, Movement, Desync)
+- **Visual** - ESP, Fullbright, XRay, FPS Boost
+- **Player** - Aimbot and Silent Aimbot settings
+- **Settings** - UI customization and keybinds
+
+### Key Features
+
+#### Fly
+- Toggle: Use keybind or click toggle
+- Speed: Adjust flight speed (default: 50)
+- WASD: Move relative to camera direction
+
+#### Aimbot
+- **FOV**: Radius of aiming circle (default: 100)
+- **Smoothness**: Aim smoothing (default: 0.5)
+- **Lock Part**: Choose body part to aim (Head, Torso, etc.)
+- **Shot Chance**: Success rate for shots (%)
+
+#### Silent Aimbot
+- Aims without moving your camera
+- **Headshot Chance**: Chance to aim head vs body
+- Useful for undetected gameplay
+
+#### Desync
+- Modifies Raknet packets for player position manipulation
+- Shows visual circle indicator when active
+- Notifications on toggle
+
+#### ESP
+- Customizable rendering options
+- Filter by team, invisibility, or health status
+- Real-time distance and health display
+
+### Configuration
+
+All settings are adjustable in the GUI:
+- Toggle features on/off
+- Adjust numeric values (speed, FOV, etc.)
+- Change keybinds
+- Customize UI theme
+
+Settings are saved automatically per-game.
+
+## Compatibility
+
+- **Works on:** Most Roblox games
+- **Optimized for:** Rivals and FPS-style games
+- **Requires:** Working Roblox executor with loadstring support
+
+## Performance
+
+- Lightweight (~50KB obfuscated)
+- Optimized callback system
+- Minimal impact on game FPS
+- Built-in FPS boost module
+
+## Important Notes
+
+- ⚠️ Use at your own risk
+- Always check game ToS before using
+- Disable before playing other games or public servers
+- Keep exploits private - don't share with non-devs
+
+## Support
+
+- Check that you have a valid executor installed
+- Ensure your executor supports `loadstring()`
+- Try restarting your game if features don't work
+- Update your executor if experiencing crashes
+
+## Legal
+
+This is for educational and authorized testing purposes only. Users are responsible for complying with Roblox Terms of Service and game-specific rules. The author is not responsible for bans or legal issues resulting from misuse.
 
 ---
 
-## Quick Start (for users)
-
-```lua
-loadstring(game:HttpGet("https://raw.githubusercontent.com/Elite23311/Extra-Advance/main/Loader.lua"))()
-```
-
-Paste this into your executor and hit Execute. That's it.
-
----
-
-## Folder Structure
-
-```
-Extra-Advance/
-├── Loader.lua            ← Users run this. Edit RAW + GameRoutes here.
-├── Features/
-│   ├── Main.lua          ← Key system, window, tabs, watermark, addons
-│   └── AimAssist.lua     ← Aim assist (loaded after key auth)
-├── Games/
-│   └── Rivals.lua        ← Rivals-specific features (auto-routed by PlaceId)
-└── README.md
-```
-
----
-
-## Setup (for developers)
-
-### 1. Edit `Loader.lua`
-
-Open `Loader.lua` and make sure line 9 says:
-
-```lua
-local RAW = "https://raw.githubusercontent.com/Elite23311/Extra-Advance/main/"
-```
-
-### 2. Add your keys
-
-Open `Features/Main.lua` and fill in `VALID_KEYS`:
-
-```lua
-local VALID_KEYS = {
-    ["yourkey123"] = true,
-    ["anotherkey"] = true,
-}
-```
-
-Keys are **case-insensitive**. Once a user enters a valid key it saves locally — they won't need to re-enter it next time.
-
-To **invalidate** all saved keys: just remove the key from the table. Saved keys on disk will fail the check on next run.
-
-### 3. Push changes to GitHub
-
-```bash
-git add .
-git commit -m "your message"
-git push
-```
-
----
-
-## Adding a New Game
-
-1. Find the game's **PlaceId** (visible in the Roblox URL: `roblox.com/games/PLACEID/...`)
-2. Create `Games/YourGame.lua`
-3. Add an entry in `Loader.lua`:
-
-```lua
-local GameRoutes = {
-    [2788229376] = "Games/Rivals.lua",
-    [YOUR_PLACE_ID] = "Games/YourGame.lua",  -- add here
-}
-```
-
----
-
-## Adding a New Feature Module
-
-1. Create `Features/MyFeature.lua`
-2. At the top reference the globals set by `Main.lua`:
-
-```lua
-local Library  = _G.Library
-local Tabs     = _G.Tabs
-local _Toggles = Toggles   -- LinoriaLib getgenv()
-local _Options = Options   -- LinoriaLib getgenv()
-```
-
-3. In `Main.lua` inside `OnAuthenticated()`, add:
-
-```lua
-_G.Load("Features/MyFeature.lua")
-```
+**Current Version:** Enterprise Obfuscated Build  
+**Last Updated:** April 2026
 
 ---
 
