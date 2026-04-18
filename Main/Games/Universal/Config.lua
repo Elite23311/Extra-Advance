@@ -1,24 +1,24 @@
-local btgtsygl=math.random()
-local auwkbocq=math.random()
-local supvdlot=math.random()
-local _b = {}
-_b.Fly = {
+local _nahjtxw=math.random()
+local _ndcfliq=math.random()
+local _nmkxjut=math.random()
+local _obb = {}
+_obb.Fly = {
 Enabled       = false,
 Speed         = 50,
 Keybind       = "F",
 }
-_b.Movement = {
+_obb.Movement = {
 WalkSpeed     = 16,
 JumpPower     = 50,
 TPWalkEnabled = false,
 TPWalkSpeed   = 100,
 InfiniteJumpEnabled = false,
 }
-_b.Desync = {
+_obb.Desync = {
 Enabled       = false,
 Keybind       = "U",
 }
-_b.ESP = {
+_obb.ESP = {
 Enabled       = false,
 Keybind       = "E",
 Chams         = false,
@@ -33,18 +33,18 @@ TeamCheck     = true,
 InvisibleCheck = true,
 HealthCheck   = true,
 }
-_b.XRay = {
+_obb.XRay = {
 Enabled       = false,
 Keybind       = "X",
 Transparency  = 0.3,
 }
-_b.Fullbright = {
+_obb.Fullbright = {
 Enabled       = false,
 }
-_b.FPSBoost = {
+_obb.FPSBoost = {
 Enabled       = false,
 }
-_b.Aimbot = {
+_obb.Aimbot = {
 Enabled       = false,
 Keybind       = "MB2",
 Mode          = "Hold",
@@ -58,7 +58,7 @@ FOVOutlineTransparency = 0,
 FOVFillTransparency = 0.5,
 FOVColor      = Color3.fromRGB(255, 255, 255),
 }
-_b.SilentAimbot = {
+_obb.SilentAimbot = {
 Enabled       = false,
 FOVRadius     = 120,
 FOVDistance   = 500,
@@ -68,4 +68,4 @@ FOVColor      = Color3.fromRGB(255, 0, 0),
 ShotChance    = 100,
 HeadshotChance = 50,
 }
-return _b
+return _obb

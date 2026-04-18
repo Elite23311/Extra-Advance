@@ -1,90 +1,90 @@
-local yelkcyeb=math.random()
-local ctegxcdl=math.random()
-local djuenzwe=math.random()
-local _b = "https://raw.githubus" .. "ercontent.com/Elite2" .. "3311/Extra-Advance/m" .. "ain/"
-local _c = "https://raw.githubus" .. "ercontent.com/violin" .. "-suzutsuki/LinoriaLi" .. "b/main/"
-local _d      = loadstring(game:HttpGet(_c .. "_d.lua"))()
-local _e = loadstring(game:HttpGet(_c .. "addons/_e.lua"))()
-local _f  = loadstring(game:HttpGet(_c .. "addons/_f.lua"))()
-_G._d      = _d
-_G._e = _e
-_G._f  = _f
-_G._b          = _b
+local _ntxsqax=math.random()
+local _nzfurvl=math.random()
+local _nqhwicq=math.random()
+local _obb = "https://raw.githubusercontent.com/Elite23311/Extra-Advance/main/"
+local _obc = "https://raw.githubusercontent.com/violin-suzutsuki/LinoriaLib/main/"
+local _obd      = loadstring(game:HttpGet(_obc .. "Library.lua"))()
+local _obe = loadstring(game:HttpGet(_obc .. "addons/ThemeManager.lua"))()
+local _obf  = loadstring(game:HttpGet(_obc .. "addons/SaveManager.lua"))()
+_G._obd      = _obd
+_G._obe = _obe
+_G._obf  = _obf
+_G._obb          = _obb
 local function loadPath(path)
-local _g, err = pcall(function()
-loadstring(game:HttpGet(_b .. path))()
+local _obg, err = pcall(function()
+loadstring(game:HttpGet(_obb .. path))()
 end)
-if not _g then
+if not _obg then
 warn("[EA] Failed to load '" .. path .. "':\n" .. tostring(err))
-_d:Notify("Load error: " .. path, 5)
+_obd:Notify("Load error: " .. path, 5)
 end
-end" .. "
-local _h = {
-[17625" .. "359962] = "Games/Rivals/Main.lua",
+end
+local _obh = {
+[17625359962] = "Games/Rivals/Main.lua",
 }
-local _i = _d:Cr" .. "eateWindow({
-Title  " .. "     = "Extra Advance",
-Center      = true" .. ",
-AutoShow    = true" .. ",
+local _obi = _obd:CreateWindow({
+Title       = "Extra Advance",
+Center      = true,
+AutoShow    = true,
 TabPadding  = 8,
-M" .. "enuFadeTime = 0.2,
-}" .. ")
-_G._i = _i
-local _" .. "j = {
-Main         =" .. " _i:AddTab("Main"),
-Visual       = _i:AddTab("Visual"),
-Player       = _i:AddTab("Player"),
-["Settings"] = _i:AddTab("Settings"),
+MenuFadeTime = 0.2,
+})
+_G._obi = _obi
+local _obj = {
+Main         = _obi:AddTab("Main"),
+Visual       = _obi:AddTab("Visual"),
+Player       = _obi:AddTab("Player"),
+["Settings"] = _obi:AddTab("Settings"),
 }
-_G._j    = _j
-_" .. "G.Toggles = Toggles
-" .. "_G.Options = Options" .. "
-local _k = loadstri" .. "ng(game:HttpGet(_b ." .. ". "_k.lua"))()
-_k.Init(functio" .. "n()
-local _l = _h[ga" .. "me.PlaceId]
-if _l th" .. "en
-loadPath(_l)
-else" .. "
-_d:Notify("No game supported are found, running universal script..", 5)
+_G._obj    = _obj
+_G.Toggles = Toggles
+_G.Options = Options
+local _obk = loadstring(game:HttpGet(_obb .. "KeySystem.lua"))()
+_obk.Init(function()
+local _obl = _obh[game.PlaceId]
+if _obl then
+loadPath(_obl)
+else
+_obd:Notify("No game supported are found, running universal script..", 5)
 loadPath("Games/Universal/Main.lua")
 end
 end)
-local _m = _j["Settings"]:AddLeftGroupbox("Menu")
-_m:AddButton("Unload", function()
-_d:Unlo" .. "ad()
+local _obm = _obj["Settings"]:AddLeftGroupbox("Menu")
+_obm:AddButton("Unload", function()
+_obd:Unload()
 end)
-_m:AddLabe" .. "l("Menu Keybind"):AddKeyPicker("MenuKeybind", {
+_obm:AddLabel("Menu Keybind"):AddKeyPicker("MenuKeybind", {
 Default = "End",
 NoUI    = true,
 Text    = "Toggle Menu",
 })
-_d.ToggleKeybin" .. "d = Options.MenuKeyb" .. "ind
-_d:SetWatermarkV" .. "isibility(true)
-loca" .. "l _n   = tick()
-loca" .. "l _o = 0
-local _p   " .. "     = 60
-local _q =" .. " game:GetService("RunService").RenderStepped:Conn" .. "ect(function()
-_o +=" .. " 1
-if (tick() - _n) " .. ">= 1 then
-_p      = " .. "_o
-_n = tick()
-_o = " .. "0
+_obd.ToggleKeybind = Options.MenuKeybind
+_obd:SetWatermarkVisibility(true)
+local _obn   = tick()
+local _obo = 0
+local _obp        = 60
+local _obq = game:GetService("RunService").RenderStepped:Connect(function()
+_obo += 1
+if (tick() - _obn) >= 1 then
+_obp      = _obo
+_obn = tick()
+_obo = 0
 end
-_d:SetWatermar" .. "k(("Extra Advance On Top  |  %d _p  |  %d ms"):format(
-math.floor" .. "(_p),
-math.floor(gam" .. "e:GetService("Stats").Network.ServerStatsItem["Data Ping"]:GetValue())
+_obd:SetWatermark(("Extra Advance On Top  |  %d fps  |  %d ms"):format(
+math.floor(_obp),
+math.floor(game:GetService("Stats").Network.ServerStatsItem["Data Ping"]:GetValue())
 ))
-end" .. ")
-_d:OnUnload(functi" .. "on()
-_q:Disconnect()" .. "
-_d.Unloaded = true
-" .. "end)
-_e:SetLibrary(_" .. "d)
-_f:SetLibrary(_d)" .. "
-_f:IgnoreThemeSetti" .. "ngs()
-_f:SetIgnoreIn" .. "dexes({ "MenuKeybind" })
-_e:SetFolder("ExtraAdvance")
-_f:SetFolder("ExtraAdvance/" .. tostring(game.Pl" .. "aceId))
-_e:ApplyToTa" .. "b(_j["Settings"])
-_f:BuildConfigSection(_j["Settings"])
-_f:LoadAutoloadConfig()
+end)
+_obd:OnUnload(function()
+_obq:Disconnect()
+_obd.Unloaded = true
+end)
+_obe:SetLibrary(_obd)
+_obf:SetLibrary(_obd)
+_obf:IgnoreThemeSettings()
+_obf:SetIgnoreIndexes({ "MenuKeybind" })
+_obe:SetFolder("ExtraAdvance")
+_obf:SetFolder("ExtraAdvance/" .. tostring(game.PlaceId))
+_obe:ApplyToTab(_obj["Settings"])
+_obf:BuildConfigSection(_obj["Settings"])
+_obf:LoadAutoloadConfig()

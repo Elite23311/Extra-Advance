@@ -1,54 +1,54 @@
-local mgftrtvk=math.random()
-local wbfvvnwg=math.random()
-local hlsgnrnw=math.random()
-local _b = require(script.Parent.Parent:WaitForChild("_b"))
-local _c          = game:GetService("_c")
-local _d       = game:GetService("_d")
-local _e = game:GetService("_e")
-local _f           = workspace.CurrentCamera
-local _g      = _c._g
-local _h = {}
-_h._b = _b._h
-_h.Circle = nil
-_h.RenderConn = nil
-_h.Callbacks = {
+local _nxqdold=math.random()
+local _ncmlbko=math.random()
+local _neyytpy=math.random()
+local _obb = require(script.Parent.Parent:WaitForChild("Config"))
+local _obc          = game:GetService("Players")
+local _obd       = game:GetService("RunService")
+local _obe = game:GetService("UserInputService")
+local _obf           = workspace.CurrentCamera
+local _obg      = _obc._obg
+local _obh = {}
+_obh._obb = _obb._obh
+_obh.Circle = nil
+_obh.RenderConn = nil
+_obh.Callbacks = {
 OnTargetAcquired = function() end,
 OnTargetLost = function() end,
 OnAimUpdate = function() end,
 }
 local function GetTarget()
-local _i   = _f.ViewportSize / 2
-local _j      = _h._b.FOV
-local _k = _h._b.TargetPart
-local _l, closestDist = nil, math.huge
-for _, plr in ipairs(_c:GetPlayers()) do
-if plr == _g then continue end
-local _m = plr.Character
-if not _m then continue end
-local _n = _m:FindFirstChildOfClass("Humanoid")
-if not _n or _n.Health <= 0 then continue end
-local _o = _m:FindFirstChild(_k) or _m:FindFirstChild("HumanoidRootPart")
-if not _o then continue end
-local _p, onScreen = _f:WorldToViewportPoint(_o.Position)
+local _obi   = _obf.ViewportSize / 2
+local _obj      = _obh._obb.FOV
+local _obk = _obh._obb.TargetPart
+local _obl, closestDist = nil, math.huge
+for _, plr in ipairs(_obc:GetPlayers()) do
+if plr == _obg then continue end
+local _obm = plr.Character
+if not _obm then continue end
+local _obn = _obm:FindFirstChildOfClass("Humanoid")
+if not _obn or _obn.Health <= 0 then continue end
+local _obo = _obm:FindFirstChild(_obk) or _obm:FindFirstChild("HumanoidRootPart")
+if not _obo then continue end
+local _obp, onScreen = _obf:WorldToViewportPoint(_obo.Position)
 if not onScreen then continue end
-local _q = (Vector2.new(_p.X, _p.Y) - _i).Magnitude
-if _q > _j then continue end
-if _h._b.VisibleOnly then
-local _r = _f.CFrame.Position
-local _s    = Ray.new(_r, _o.Position - _r)
-local _t    = workspace:FindPartOnRayWithIgnoreList(_s, { _g.Character, _f })
-if _t and not _t:IsDescendantOf(_m) then continue end
+local _obq = (Vector2.new(_obp.X, _obp.Y) - _obi).Magnitude
+if _obq > _obj then continue end
+if _obh._obb.VisibleOnly then
+local _obr = _obf.CFrame.Position
+local _obs    = Ray.new(_obr, _obo.Position - _obr)
+local _obt    = workspace:FindPartOnRayWithIgnoreList(_obs, { _obg.Character, _obf })
+if _obt and not _obt:IsDescendantOf(_obm) then continue end
 end
-if _q < closestDist then
-closestDist = _q
-_l     = _o
+if _obq < closestDist then
+closestDist = _obq
+_obl     = _obo
 end
 end
-return _l
+return _obl
 end
-function _h:Start()
+function _obh:Start()
 if self.RenderConn then
-warn("[_h] Already running!")
+warn("[AimAssist] Already running!")
 return
 end
 self.Circle = Drawing.new("Circle")
@@ -56,33 +56,33 @@ self.Circle.Visible   = false
 self.Circle.Filled    = false
 self.Circle.Thickness = 1
 self.Circle.NumSides  = 64
-self.Circle.Radius    = self._b.FOV
-self.Circle.Color     = self._b.FOVColor
-self.RenderConn = _d.RenderStepped:Connect(function()
-local _i = _f.ViewportSize / 2
-if self._b.ShowFOV then
+self.Circle.Radius    = self._obb.FOV
+self.Circle.Color     = self._obb.FOVColor
+self.RenderConn = _obd.RenderStepped:Connect(function()
+local _obi = _obf.ViewportSize / 2
+if self._obb.ShowFOV then
 self.Circle.Visible  = true
-self.Circle.Position = _i
-self.Circle.Radius   = self._b.FOV
+self.Circle.Position = _obi
+self.Circle.Radius   = self._obb.FOV
 else
 self.Circle.Visible = false
 end
-if not self._b.Enabled then return end
-if self._b.OnlyWhileClicking and not _e:IsMouseButtonPressed(Enum.UserInputType.MouseButton1) then
+if not self._obb.Enabled then return end
+if self._obb.OnlyWhileClicking and not _obe:IsMouseButtonPressed(Enum.UserInputType.MouseButton1) then
 return
 end
-local _u = GetTarget()
-if not _u then
+local _obu = GetTarget()
+if not _obu then
 self.Callbacks.OnTargetLost()
 return
 end
-self.Callbacks.OnTargetAcquired(_u)
-local _v = CFrame.lookAt(_f.CFrame.Position, _u.Position)
-_f.CFrame  = _f.CFrame:Lerp(_v, 1 / self._b.Smoothness)
-self.Callbacks.OnAimUpdate(_u, _v)
+self.Callbacks.OnTargetAcquired(_obu)
+local _obv = CFrame.lookAt(_obf.CFrame.Position, _obu.Position)
+_obf.CFrame  = _obf.CFrame:Lerp(_obv, 1 / self._obb.Smoothness)
+self.Callbacks.OnAimUpdate(_obu, _obv)
 end)
 end
-function _h:Stop()
+function _obh:Stop()
 if self.RenderConn then
 self.RenderConn:Disconnect()
 self.RenderConn = nil
@@ -92,18 +92,18 @@ self.Circle:Remove()
 self.Circle = nil
 end
 end
-function _h:SetConfig(key, value)
-if self._b[key] ~= nil then
-self._b[key] = value
+function _obh:SetConfig(key, value)
+if self._obb[key] ~= nil then
+self._obb[key] = value
 end
 end
-function _h:OnTargetAcquired(callback)
+function _obh:OnTargetAcquired(callback)
 self.Callbacks.OnTargetAcquired = callback
 end
-function _h:OnTargetLost(callback)
+function _obh:OnTargetLost(callback)
 self.Callbacks.OnTargetLost = callback
 end
-function _h:OnAimUpdate(callback)
+function _obh:OnAimUpdate(callback)
 self.Callbacks.OnAimUpdate = callback
 end
-return _h
+return _obh

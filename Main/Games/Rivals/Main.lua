@@ -1,58 +1,58 @@
-local hpctyrzp=math.random()
-local ycbiaubs=math.random()
-local hdbgbzuq=math.random()
-local _b = _G._b
-local _c = _G._c
-local _d = _G._d
-local _e = require(script.Parent:WaitForChild("Callback"):WaitForChild("_e"))
-local _f = _d.Main:AddLeftGroupbox("Rivals - Aim Assist")
-_f:AddToggle("RivalsAim", {
+local _nptrkoe=math.random()
+local _nqckgdt=math.random()
+local _nytxkfh=math.random()
+local _obb = _G._obb
+local _obc = _G._obc
+local _obd = _G._obd
+local _obe = require(script.Parent:WaitForChild("Callback"):WaitForChild("AimAssist"))
+local _obf = _obd.Main:AddLeftGroupbox("Rivals - Aim Assist")
+_obf:AddToggle("RivalsAim", {
 Text    = "Enable Aim Assist",
 Default = false,
 Callback = function(value)
-_e:SetConfig("Enabled", value)
+_obe:SetConfig("Enabled", value)
 if value then
-_e:Start()
-_c:Notify("Aim Assist started!", 2)
+_obe:Start()
+_obc:Notify("Aim Assist started!", 2)
 else
-_e:Stop()
-_c:Notify("Aim Assist stopped!", 2)
+_obe:Stop()
+_obc:Notify("Aim Assist stopped!", 2)
 end
 end,
 })
-_f:AddToggle("RivalsAimFOV", {
+_obf:AddToggle("RivalsAimFOV", {
 Text    = "Show FOV",
-Default = _e.Config.ShowFOV,
+Default = _obe.Config.ShowFOV,
 Callback = function(value)
-_e:SetConfig("ShowFOV", value)
+_obe:SetConfig("ShowFOV", value)
 end,
 })
-_f:AddSlider("RivalsAimFOVRadius", {
+_obf:AddSlider("RivalsAimFOVRadius", {
 Text     = "FOV Radius",
-Default  = _e.Config.FOV,
+Default  = _obe.Config.FOV,
 Min      = 20,
 Max      = 500,
 Rounding = 0,
 Callback = function(value)
-_e:SetConfig("FOV", value)
+_obe:SetConfig("FOV", value)
 end,
 })
-_f:AddSlider("RivalsAimSmooth", {
+_obf:AddSlider("RivalsAimSmooth", {
 Text     = "Smoothness",
-Default  = _e.Config.Smoothness,
+Default  = _obe.Config.Smoothness,
 Min      = 1,
 Max      = 100,
 Rounding = 0,
 Callback = function(value)
-_e:SetConfig("Smoothness", value)
+_obe:SetConfig("Smoothness", value)
 end,
 })
-_f:AddDropdown("RivalsAimPart", {
+_obf:AddDropdown("RivalsAimPart", {
 Values  = { "Head", "HumanoidRootPart", "UpperTorso", "LowerTorso" },
 Default = 1,
 Text    = "Target Part",
 Callback = function(value)
-_e:SetConfig("TargetPart", value)
+_obe:SetConfig("TargetPart", value)
 end,
 })
-_c:Notify("Rivals game loaded!", 3)
+_obc:Notify("Rivals game loaded!", 3)

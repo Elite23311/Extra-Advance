@@ -1,35 +1,35 @@
-local ckeloxpz=math.random()
-local daphpkxf=math.random()
-local xxxadetm=math.random()
-local _b = game:GetService("_b")
-local _c = game:GetService("_c")
-local _d = {}
-_d.OriginalLighting = {
-Brightness = _b.Brightness,
-Ambient = _b.Ambient,
-OutdoorAmbient = _b.OutdoorAmbient,
+local _nsusaqd=math.random()
+local _nsnwrzf=math.random()
+local _ntdlhvf=math.random()
+local _obb = game:GetService("Lighting")
+local _obc = game:GetService("RunService")
+local _obd = {}
+_obd.OriginalLighting = {
+Brightness = _obb.Brightness,
+Ambient = _obb.Ambient,
+OutdoorAmbient = _obb.OutdoorAmbient,
 }
-_d.OriginalTransparencies = {}
-_d.FullbrightEnabled = false
-_d.XRayEnabled = false
-_d.XRayTransparency = 0.3
-_d.FPSBoostEnabled = false
-_d.FPSBoostConn = nil
-function _d:EnableFullbright()
+_obd.OriginalTransparencies = {}
+_obd.FullbrightEnabled = false
+_obd.XRayEnabled = false
+_obd.XRayTransparency = 0.3
+_obd.FPSBoostEnabled = false
+_obd.FPSBoostConn = nil
+function _obd:EnableFullbright()
 if self.FullbrightEnabled then return end
 self.FullbrightEnabled = true
-_b.Brightness = 2
-_b.Ambient = Color3.fromRGB(255, 255, 255)
-_b.OutdoorAmbient = Color3.fromRGB(255, 255, 255)
+_obb.Brightness = 2
+_obb.Ambient = Color3.fromRGB(255, 255, 255)
+_obb.OutdoorAmbient = Color3.fromRGB(255, 255, 255)
 end
-function _d:DisableFullbright()
+function _obd:DisableFullbright()
 if not self.FullbrightEnabled then return end
 self.FullbrightEnabled = false
-_b.Brightness = self.OriginalLighting.Brightness
-_b.Ambient = self.OriginalLighting.Ambient
-_b.OutdoorAmbient = self.OriginalLighting.OutdoorAmbient
+_obb.Brightness = self.OriginalLighting.Brightness
+_obb.Ambient = self.OriginalLighting.Ambient
+_obb.OutdoorAmbient = self.OriginalLighting.OutdoorAmbient
 end
-function _d:EnableXRay()
+function _obd:EnableXRay()
 if self.XRayEnabled then return end
 self.XRayEnabled = true
 local function setTransparency(part, amount)
@@ -47,7 +47,7 @@ setTransparency(part, self.XRayTransparency)
 end
 end)
 end
-function _d:DisableXRay()
+function _obd:DisableXRay()
 if not self.XRayEnabled then return end
 self.XRayEnabled = false
 for part, transparency in pairs(self.OriginalTransparencies) do
@@ -57,7 +57,7 @@ end
 end
 self.OriginalTransparencies = {}
 end
-function _d:SetXRayTransparency(amount)
+function _obd:SetXRayTransparency(amount)
 self.XRayTransparency = math.clamp(amount, 0, 1)
 if self.XRayEnabled then
 for part, _ in pairs(self.OriginalTransparencies) do
@@ -67,11 +67,11 @@ end
 end
 end
 end
-function _d:EnableFPSBoost()
+function _obd:EnableFPSBoost()
 if self.FPSBoostEnabled then return end
 self.FPSBoostEnabled = true
-local _e
-_e = _c.RenderStepped:Connect(function()
+local _obe
+_obe = _obc.RenderStepped:Connect(function()
 if self.FPSBoostEnabled then
 for _, part in pairs(workspace:GetDescendants()) do
 if part:IsA("ParticleEmitter") then
@@ -79,12 +79,12 @@ part.Enabled = false
 end
 end
 else
-_e:Disconnect()
+_obe:Disconnect()
 end
 end)
-self.FPSBoostConn = _e
+self.FPSBoostConn = _obe
 end
-function _d:DisableFPSBoost()
+function _obd:DisableFPSBoost()
 if not self.FPSBoostEnabled then return end
 self.FPSBoostEnabled = false
 if self.FPSBoostConn then
@@ -97,4 +97,4 @@ part.Enabled = true
 end
 end
 end
-return _d
+return _obd

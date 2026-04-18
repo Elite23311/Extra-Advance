@@ -1,114 +1,114 @@
-local xbtwdjhn=math.random()
-local lyfgpqme=math.random()
-local fffxinvn=math.random()
-local _b = game:GetService("_b")
-local _c = game:GetService("_c")
-local _d = game:GetService("_d")
-local _e = _b._e
-local _f = {}
-_f.WalkSpeedValue = 16
-_f.JumpPowerValue = 50
-_f.TPWalkEnabled = false
-_f.TPWalkSpeed = 100
-_f.InfiniteJumpEnabled = false
-_f.RenderConn = nil
-_f.HumanoidConnection = nil
+local _nkhnhqu=math.random()
+local _nqxvzrt=math.random()
+local _npucztd=math.random()
+local _obb = game:GetService("Players")
+local _obc = game:GetService("RunService")
+local _obd = game:GetService("UserInputService")
+local _obe = _obb._obe
+local _obf = {}
+_obf.WalkSpeedValue = 16
+_obf.JumpPowerValue = 50
+_obf.TPWalkEnabled = false
+_obf.TPWalkSpeed = 100
+_obf.InfiniteJumpEnabled = false
+_obf.RenderConn = nil
+_obf.HumanoidConnection = nil
 local function hookHumanoid(humanoid)
 if not humanoid then return end
-local _g = humanoid.WalkSpeed
+local _obg = humanoid.WalkSpeed
 hookfunction(humanoid, "GetPropertyChangedSignal", function(self, prop)
 if prop == "WalkSpeed" then
 task.defer(function()
 if humanoid and humanoid.Parent then
-humanoid.WalkSpeed = _f.WalkSpeedValue
+humanoid.WalkSpeed = _obf.WalkSpeedValue
 end
 end)
 end
-return _g
+return _obg
 end)
-humanoid.WalkSpeed = _f.WalkSpeedValue
+humanoid.WalkSpeed = _obf.WalkSpeedValue
 end
 local function setupTPWalk()
-local _h = workspace.CurrentCamera
-local _b = game:GetService("_b")
-local _e = _b._e
-return _c.RenderStepped:Connect(function()
-if not _f.TPWalkEnabled or not _e.Character or not _e.Character:FindFirstChild("HumanoidRootPart") then
+local _obh = workspace.CurrentCamera
+local _obb = game:GetService("Players")
+local _obe = _obb._obe
+return _obc.RenderStepped:Connect(function()
+if not _obf.TPWalkEnabled or not _obe.Character or not _obe.Character:FindFirstChild("HumanoidRootPart") then
 return
 end
-local _i = _e.Character.HumanoidRootPart
-local _j = Vector3.new(0, 0, 0)
-if _d:IsKeyDown(Enum.KeyCode.W) then
-_j = _j + (_h.CFrame.LookVector * Vector3.new(1, 0, 1)).Unit
+local _obi = _obe.Character.HumanoidRootPart
+local _obj = Vector3.new(0, 0, 0)
+if _obd:IsKeyDown(Enum.KeyCode.W) then
+_obj = _obj + (_obh.CFrame.LookVector * Vector3.new(1, 0, 1)).Unit
 end
-if _d:IsKeyDown(Enum.KeyCode.S) then
-_j = _j - (_h.CFrame.LookVector * Vector3.new(1, 0, 1)).Unit
+if _obd:IsKeyDown(Enum.KeyCode.S) then
+_obj = _obj - (_obh.CFrame.LookVector * Vector3.new(1, 0, 1)).Unit
 end
-if _d:IsKeyDown(Enum.KeyCode.A) then
-_j = _j - _h.CFrame.RightVector
+if _obd:IsKeyDown(Enum.KeyCode.A) then
+_obj = _obj - _obh.CFrame.RightVector
 end
-if _d:IsKeyDown(Enum.KeyCode.D) then
-_j = _j + _h.CFrame.RightVector
+if _obd:IsKeyDown(Enum.KeyCode.D) then
+_obj = _obj + _obh.CFrame.RightVector
 end
-if _j.Magnitude > 0 then
-_j = _j.Unit
-_i.CFrame = _i.CFrame + _j * (_f.TPWalkSpeed / 60)
+if _obj.Magnitude > 0 then
+_obj = _obj.Unit
+_obi.CFrame = _obi.CFrame + _obj * (_obf.TPWalkSpeed / 60)
 end
 end)
 end
-function _f:SetWalkSpeed(speed)
+function _obf:SetWalkSpeed(speed)
 self.WalkSpeedValue = speed
-local _k = _e.Character
-if _k and _k:FindFirstChild("Humanoid") then
-_k.Humanoid.WalkSpeed = speed
+local _obk = _obe.Character
+if _obk and _obk:FindFirstChild("Humanoid") then
+_obk.Humanoid.WalkSpeed = speed
 end
 end
-function _f:SetJumpPower(power)
+function _obf:SetJumpPower(power)
 self.JumpPowerValue = power
-local _k = _e.Character
-if _k and _k:FindFirstChild("Humanoid") then
-_k.Humanoid.JumpPower = power
+local _obk = _obe.Character
+if _obk and _obk:FindFirstChild("Humanoid") then
+_obk.Humanoid.JumpPower = power
 end
 end
-function _f:EnableInfiniteJump()
+function _obf:EnableInfiniteJump()
 self.InfiniteJumpEnabled = true
-_d.InputBegan:Connect(function(input, gameProcessed)
+_obd.InputBegan:Connect(function(input, gameProcessed)
 if gameProcessed then return end
 if input.UserInputType == Enum.UserInputType.Keyboard and input.KeyCode == Enum.KeyCode.Space then
-local _k = _e.Character
-if _k and _k:FindFirstChild("Humanoid") and self.InfiniteJumpEnabled then
-_k.Humanoid:ChangeState(Enum.HumanoidStateType.Jumping)
+local _obk = _obe.Character
+if _obk and _obk:FindFirstChild("Humanoid") and self.InfiniteJumpEnabled then
+_obk.Humanoid:ChangeState(Enum.HumanoidStateType.Jumping)
 end
 end
 end)
 end
-function _f:DisableInfiniteJump()
+function _obf:DisableInfiniteJump()
 self.InfiniteJumpEnabled = false
 end
-function _f:EnableTPWalk()
+function _obf:EnableTPWalk()
 if self.RenderConn then
 self.RenderConn:Disconnect()
 end
 self.TPWalkEnabled = true
 self.RenderConn = setupTPWalk()
 end
-function _f:DisableTPWalk()
+function _obf:DisableTPWalk()
 if self.RenderConn then
 self.RenderConn:Disconnect()
 self.RenderConn = nil
 end
 self.TPWalkEnabled = false
 end
-function _f:Init()
-local _k = _e.Character
-if _k and _k:FindFirstChild("Humanoid") then
-hookHumanoid(_k.Humanoid)
+function _obf:Init()
+local _obk = _obe.Character
+if _obk and _obk:FindFirstChild("Humanoid") then
+hookHumanoid(_obk.Humanoid)
 end
-_e.CharacterAdded:Connect(function(newChar)
+_obe.CharacterAdded:Connect(function(newChar)
 task.wait(0.1)
 if newChar:FindFirstChild("Humanoid") then
 hookHumanoid(newChar.Humanoid)
 end
 end)
 end
-return _f
+return _obf

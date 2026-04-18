@@ -1,72 +1,72 @@
-local deuzidht=math.random()
-local hmndnzpm=math.random()
-local xgzvbwzp=math.random()
-local _b = game:GetService("_b")
-local _c = game:GetService("_c")
-local _d = _b._d
-local _e = {}
-_e.Enabled = false
-_e.FOVRadius = 120
-_e.FOVDistance = 500
-_e.ShotChance = 100
-_e.HeadshotChance = 50
-_e.RenderConn = nil
-_e.LastTarget = nil
-function _e:GetTarget()
-local _f = workspace.CurrentCamera
-local _g = _f.ViewportSize / 2
-local _h, closestDist = nil, math.huge
-for _, player in pairs(_b:GetPlayers()) do
-if player == _d then continue end
-local _i = player.Character
-if not _i then continue end
-local _j = _i:FindFirstChildOfClass("Humanoid")
-if not _j or _j.Health <= 0 then continue end
-local _k = _i:FindFirstChild("Head") or _i:FindFirstChild("HumanoidRootPart")
-if not _k then continue end
-local _l, onScreen = _f:WorldToViewportPoint(_k.Position)
+local _ntynpes=math.random()
+local _nmmwcsx=math.random()
+local _ndxepid=math.random()
+local _obb = game:GetService("Players")
+local _obc = game:GetService("RunService")
+local _obd = _obb._obd
+local _obe = {}
+_obe.Enabled = false
+_obe.FOVRadius = 120
+_obe.FOVDistance = 500
+_obe.ShotChance = 100
+_obe.HeadshotChance = 50
+_obe.RenderConn = nil
+_obe.LastTarget = nil
+function _obe:GetTarget()
+local _obf = workspace.CurrentCamera
+local _obg = _obf.ViewportSize / 2
+local _obh, closestDist = nil, math.huge
+for _, player in pairs(_obb:GetPlayers()) do
+if player == _obd then continue end
+local _obi = player.Character
+if not _obi then continue end
+local _obj = _obi:FindFirstChildOfClass("Humanoid")
+if not _obj or _obj.Health <= 0 then continue end
+local _obk = _obi:FindFirstChild("Head") or _obi:FindFirstChild("HumanoidRootPart")
+if not _obk then continue end
+local _obl, onScreen = _obf:WorldToViewportPoint(_obk.Position)
 if not onScreen then continue end
-local _m = (_f.CFrame.Position - _k.Position).Magnitude
-if _m > self.FOVDistance then continue end
-local _n = (Vector2.new(_l.X, _l.Y) - _g).Magnitude
-if _n > self.FOVRadius then continue end
-if _n < closestDist then
-closestDist = _n
-_h = _k
+local _obm = (_obf.CFrame.Position - _obk.Position).Magnitude
+if _obm > self.FOVDistance then continue end
+local _obn = (Vector2.new(_obl.X, _obl.Y) - _obg).Magnitude
+if _obn > self.FOVRadius then continue end
+if _obn < closestDist then
+closestDist = _obn
+_obh = _obk
 end
 end
-return _h
+return _obh
 end
-function _e:ShouldShoot()
+function _obe:ShouldShoot()
 return math.random(1, 100) <= self.ShotChance
 end
-function _e:ShouldHeadshot()
+function _obe:ShouldHeadshot()
 return math.random(1, 100) <= self.HeadshotChance
 end
-function _e:Start()
+function _obe:Start()
 if self.RenderConn then return end
 self.Enabled = true
-self.RenderConn = _c.RenderStepped:Connect(function()
+self.RenderConn = _obc.RenderStepped:Connect(function()
 if not self.Enabled then return end
 if not self:ShouldShoot() then
 self.LastTarget = nil
 return
 end
-local _o = self:GetTarget()
-if _o and self:ShouldHeadshot() then
-local _i = _o.Parent
-if _i then
-local _p = _i:FindFirstChild("Head")
-if _p then
-self.LastTarget = _p
+local _obo = self:GetTarget()
+if _obo and self:ShouldHeadshot() then
+local _obi = _obo.Parent
+if _obi then
+local _obp = _obi:FindFirstChild("Head")
+if _obp then
+self.LastTarget = _obp
 return
 end
 end
 end
-self.LastTarget = _o
+self.LastTarget = _obo
 end)
 end
-function _e:Stop()
+function _obe:Stop()
 self.Enabled = false
 if self.RenderConn then
 self.RenderConn:Disconnect()
@@ -74,12 +74,12 @@ self.RenderConn = nil
 end
 self.LastTarget = nil
 end
-function _e:GetLastTarget()
+function _obe:GetLastTarget()
 return self.LastTarget
 end
-function _e:SetConfig(key, value)
+function _obe:SetConfig(key, value)
 if self[key] ~= nil then
 self[key] = value
 end
 end
-return _e
+return _obe

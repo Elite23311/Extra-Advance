@@ -1,12 +1,12 @@
-local bluxjqah=math.random()
-local xjyqrytx=math.random()
-local jycsqugv=math.random()
-local _b = game:GetService("_b")
-local _c = game:GetService("_c")
-local _d = _b._d
-local _e = {}
-_e.Enabled = false
-_e.Options = {
+local _npujpal=math.random()
+local _niqsqcl=math.random()
+local _napdbix=math.random()
+local _obb = game:GetService("Players")
+local _obc = game:GetService("RunService")
+local _obd = _obb._obd
+local _obe = {}
+_obe.Enabled = false
+_obe.Options = {
 Chams = false,
 ChamsColor = Color3.fromRGB(0, 255, 0),
 Box = false,
@@ -19,126 +19,126 @@ TeamCheck = true,
 InvisibleCheck = true,
 HealthCheck = true,
 }
-_e.Drawings = {}
-_e.RenderConn = nil
-_e.ChamsHighlights = {}
-function _e:IsPlayerValid(player)
-if player == _d then return false end
-local _f = player.Character
-if not _f then return false end
-if self.Options.TeamCheck and player.Team == _d.Team then
+_obe.Drawings = {}
+_obe.RenderConn = nil
+_obe.ChamsHighlights = {}
+function _obe:IsPlayerValid(player)
+if player == _obd then return false end
+local _obf = player.Character
+if not _obf then return false end
+if self.Options.TeamCheck and player.Team == _obd.Team then
 return false
 end
 if self.Options.HealthCheck then
-local _g = _f:FindFirstChildOfClass("Humanoid")
-if not _g or _g.Health <= 0 then return false end
+local _obg = _obf:FindFirstChildOfClass("Humanoid")
+if not _obg or _obg.Health <= 0 then return false end
 end
 if self.Options.InvisibleCheck then
-local _h = _f:FindFirstChild("HumanoidRootPart")
-if _h and _h.Transparency >= 1 then return false end
+local _obh = _obf:FindFirstChild("HumanoidRootPart")
+if _obh and _obh.Transparency >= 1 then return false end
 end
 return true
 end
-function _e:CreateBox(_f, color)
-local _i = _f:GetFullName() .. "_box"
-if self.Drawings[_i] then
-self.Drawings[_i]:Remove()
+function _obe:CreateBox(_obf, color)
+local _obi = _obf:GetFullName() .. "_box"
+if self.Drawings[_obi] then
+self.Drawings[_obi]:Remove()
 end
-local _j = Drawing.new("Square")
-_j.Thickness = 2
-_j.Filled = false
-_j.Color = color
-_j.Transparency = 1
-self.Drawings[_i] = _j
-return _j
+local _obj = Drawing.new("Square")
+_obj.Thickness = 2
+_obj.Filled = false
+_obj.Color = color
+_obj.Transparency = 1
+self.Drawings[_obi] = _obj
+return _obj
 end
-function _e:CreateHealthBar(_f, color)
-local _i = _f:GetFullName() .. "_health"
-if self.Drawings[_i] then
-self.Drawings[_i]:Remove()
+function _obe:CreateHealthBar(_obf, color)
+local _obi = _obf:GetFullName() .. "_health"
+if self.Drawings[_obi] then
+self.Drawings[_obi]:Remove()
 end
-local _k = Drawing.new("Line")
-_k.Thickness = 3
-_k.Color = color
-self.Drawings[_i] = _k
-return _k
+local _obk = Drawing.new("Line")
+_obk.Thickness = 3
+_obk.Color = color
+self.Drawings[_obi] = _obk
+return _obk
 end
-function _e:CreateNameLabel(_f, player)
-local _i = _f:GetFullName() .. "_name"
-if self.Drawings[_i] then
-self.Drawings[_i]:Remove()
+function _obe:CreateNameLabel(_obf, player)
+local _obi = _obf:GetFullName() .. "_name"
+if self.Drawings[_obi] then
+self.Drawings[_obi]:Remove()
 end
-local _l = Drawing.new("Text")
-_l.Color = Color3.fromRGB(255, 255, 255)
-_l.Size = 16
-_l.Font = 2
-_l.Text = player.Name
-self.Drawings[_i] = _l
-return _l
+local _obl = Drawing.new("Text")
+_obl.Color = Color3.fromRGB(255, 255, 255)
+_obl.Size = 16
+_obl.Font = 2
+_obl.Text = player.Name
+self.Drawings[_obi] = _obl
+return _obl
 end
-function _e:EnableChams(player)
+function _obe:EnableChams(player)
 if not self.Options.Chams then return end
-local _f = player.Character
-if not _f then return end
-for _, part in pairs(_f:GetDescendants()) do
+local _obf = player.Character
+if not _obf then return end
+for _, part in pairs(_obf:GetDescendants()) do
 if part:IsA("BasePart") then
-local _m = Instance.new("Highlight")
-_m.FillColor = self.Options.ChamsColor
-_m.OutlineColor = self.Options.ChamsColor
-_m.Parent = part
+local _obm = Instance.new("Highlight")
+_obm.FillColor = self.Options.ChamsColor
+_obm.OutlineColor = self.Options.ChamsColor
+_obm.Parent = part
 table.insert(self.ChamsHighlights, {
 player = player,
-_m = _m,
+_obm = _obm,
 })
 end
 end
 end
-function _e:Start()
+function _obe:Start()
 if self.RenderConn then return end
 self.Enabled = true
-for _, player in pairs(_b:GetPlayers()) do
+for _, player in pairs(_obb:GetPlayers()) do
 if self:IsPlayerValid(player) then
 self:EnableChams(player)
 end
 end
-self.RenderConn = _c.RenderStepped:Connect(function()
-local _n = workspace.CurrentCamera
-for _, player in pairs(_b:GetPlayers()) do
+self.RenderConn = _obc.RenderStepped:Connect(function()
+local _obn = workspace.CurrentCamera
+for _, player in pairs(_obb:GetPlayers()) do
 if not self:IsPlayerValid(player) then
-local _o = player.Character and player.Character:GetFullName()
-if _o then
-for _i, drawing in pairs(self.Drawings) do
-if _i:find(_o) then
+local _obo = player.Character and player.Character:GetFullName()
+if _obo then
+for _obi, drawing in pairs(self.Drawings) do
+if _obi:find(_obo) then
 drawing:Remove()
-self.Drawings[_i] = nil
+self.Drawings[_obi] = nil
 end
 end
 end
 continue
 end
-local _f = player.Character
-local _h = _f:FindFirstChild("HumanoidRootPart")
-if not _h then continue end
-local _p, onScreen = _n:WorldToViewportPoint(_h.Position)
+local _obf = player.Character
+local _obh = _obf:FindFirstChild("HumanoidRootPart")
+if not _obh then continue end
+local _obp, onScreen = _obn:WorldToViewportPoint(_obh.Position)
 if not onScreen then continue end
 if self.Options.Name then
-local _l = self:CreateNameLabel(_f, player)
-_l.Position = Vector2.new(_p.X, _p.Y - 30)
+local _obl = self:CreateNameLabel(_obf, player)
+_obl.Position = Vector2.new(_obp.X, _obp.Y - 30)
 end
 if self.Options.Distance then
-local _q = (_n.CFrame.Position - _h.Position).Magnitude
-local _r = Drawing.new("Text")
-_r.Color = Color3.fromRGB(255, 255, 255)
-_r.Size = 14
-_r.Font = 2
-_r.Text = string.format("%.1f", _q) .. "m"
-_r.Position = Vector2.new(_p.X, _p.Y + 30)
-table.insert(self.Drawings, _r)
+local _obq = (_obn.CFrame.Position - _obh.Position).Magnitude
+local _obr = Drawing.new("Text")
+_obr.Color = Color3.fromRGB(255, 255, 255)
+_obr.Size = 14
+_obr.Font = 2
+_obr.Text = string.format("%.1f", _obq) .. "m"
+_obr.Position = Vector2.new(_obp.X, _obp.Y + 30)
+table.insert(self.Drawings, _obr)
 end
 end
 end)
 end
-function _e:Stop()
+function _obe:Stop()
 self.Enabled = false
 if self.RenderConn then
 self.RenderConn:Disconnect()
@@ -149,15 +149,15 @@ if drawing then drawing:Remove() end
 end
 self.Drawings = {}
 for _, data in pairs(self.ChamsHighlights) do
-if data._m then data._m:Destroy() end
+if data._obm then data._obm:Destroy() end
 end
 self.ChamsHighlights = {}
 end
-function _e:Toggle()
+function _obe:Toggle()
 if self.Enabled then
 self:Stop()
 else
 self:Start()
 end
 end
-return _e
+return _obe

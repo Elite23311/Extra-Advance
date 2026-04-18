@@ -1,63 +1,63 @@
-local cakpedho=math.random()
-local yrcstbqa=math.random()
-local owxmtqpy=math.random()
-local _b = game:GetService("_b")
-local _c = game:GetService("_c")
-local _d = game:GetService("_d")
-local _e = _c._e
-local _f = {}
-_f.Enabled = false
-_f.Speed = 50
-_f.VelocityVector = Vector3.new(0, 0, 0)
-_f.RenderConn = nil
-_f.BodyVelocity = nil
-function _f:Start()
+local _nsdgjzq=math.random()
+local _nhjifgk=math.random()
+local _nmuscnm=math.random()
+local _obb = game:GetService("RunService")
+local _obc = game:GetService("Players")
+local _obd = game:GetService("UserInputService")
+local _obe = _obc._obe
+local _obf = {}
+_obf.Enabled = false
+_obf.Speed = 50
+_obf.VelocityVector = Vector3.new(0, 0, 0)
+_obf.RenderConn = nil
+_obf.BodyVelocity = nil
+function _obf:Start()
 if self.RenderConn then
-warn("[_f] Already running!")
+warn("[Fly] Already running!")
 return
 end
-local _g = _e.Character
-if not _g or not _g:FindFirstChild("HumanoidRootPart") then
-warn("[_f] No character found!")
+local _obg = _obe.Character
+if not _obg or not _obg:FindFirstChild("HumanoidRootPart") then
+warn("[Fly] No character found!")
 return
 end
-local _h = _g.HumanoidRootPart
+local _obh = _obg.HumanoidRootPart
 self.BodyVelocity = Instance.new("BodyVelocity")
 self.BodyVelocity.Velocity = Vector3.new(0, 0, 0)
 self.BodyVelocity.MaxForce = Vector3.new(math.huge, math.huge, math.huge)
-self.BodyVelocity.Parent = _h
-self.RenderConn = _b.RenderStepped:Connect(function()
-if not self.Enabled or not _h.Parent then
+self.BodyVelocity.Parent = _obh
+self.RenderConn = _obb.RenderStepped:Connect(function()
+if not self.Enabled or not _obh.Parent then
 self:Stop()
 return
 end
-local _i = workspace.CurrentCamera
-local _j = Vector3.new(0, 0, 0)
-if _d:IsKeyDown(Enum.KeyCode.W) then
-_j = _j + (_i.CFrame.LookVector * Vector3.new(1, 0, 1)).Unit
+local _obi = workspace.CurrentCamera
+local _obj = Vector3.new(0, 0, 0)
+if _obd:IsKeyDown(Enum.KeyCode.W) then
+_obj = _obj + (_obi.CFrame.LookVector * Vector3.new(1, 0, 1)).Unit
 end
-if _d:IsKeyDown(Enum.KeyCode.S) then
-_j = _j - (_i.CFrame.LookVector * Vector3.new(1, 0, 1)).Unit
+if _obd:IsKeyDown(Enum.KeyCode.S) then
+_obj = _obj - (_obi.CFrame.LookVector * Vector3.new(1, 0, 1)).Unit
 end
-if _d:IsKeyDown(Enum.KeyCode.A) then
-_j = _j - _i.CFrame.RightVector
+if _obd:IsKeyDown(Enum.KeyCode.A) then
+_obj = _obj - _obi.CFrame.RightVector
 end
-if _d:IsKeyDown(Enum.KeyCode.D) then
-_j = _j + _i.CFrame.RightVector
+if _obd:IsKeyDown(Enum.KeyCode.D) then
+_obj = _obj + _obi.CFrame.RightVector
 end
-if _d:IsKeyDown(Enum.KeyCode.Space) then
-_j = _j + Vector3.new(0, 1, 0)
+if _obd:IsKeyDown(Enum.KeyCode.Space) then
+_obj = _obj + Vector3.new(0, 1, 0)
 end
-if _d:IsKeyDown(Enum.KeyCode.LeftControl) then
-_j = _j - Vector3.new(0, 1, 0)
+if _obd:IsKeyDown(Enum.KeyCode.LeftControl) then
+_obj = _obj - Vector3.new(0, 1, 0)
 end
-if _j.Magnitude > 0 then
-_j = _j.Unit
+if _obj.Magnitude > 0 then
+_obj = _obj.Unit
 end
-self.BodyVelocity.Velocity = _j * self.Speed
+self.BodyVelocity.Velocity = _obj * self.Speed
 end)
 end
-function _f:Stop()
+function _obf:Stop()
 if self.RenderConn then
 self.RenderConn:Disconnect()
 self.RenderConn = nil
@@ -68,7 +68,7 @@ self.BodyVelocity = nil
 end
 self.Enabled = false
 end
-function _f:SetSpeed(speed)
+function _obf:SetSpeed(speed)
 self.Speed = speed
 end
-return _f
+return _obf

@@ -1,429 +1,429 @@
-local dziwvcur=math.random()
-local qityvvml=math.random()
-local bscyciee=math.random()
-local _b = _G._b
-local _c = _G._c
-local _d = require(script.Parent:WaitForChild("_d"))
-local _e = require(script.Parent.Callback:WaitForChild("_e"))
-local _f = require(script.Parent.Callback:WaitForChild("_f"))
-local _g = require(script.Parent.Callback:WaitForChild("_g"))
-local _h = require(script.Parent.Callback:WaitForChild("_h"))
-local _i = require(script.Parent.Callback:WaitForChild("_i"))
-local _j = require(script.Parent.Callback:WaitForChild("_j"))
-local _k = require(script.Parent.Callback:WaitForChild("_k"))
-local _l = Raknet or raknet
-_f:Init()
-local _m = _c.Main:AddLeftGroupbox("_e")
-_m:AddToggle("UniversalFly", {
-Text    = "Enable _e",
+local _nlprzhq=math.random()
+local _nzllbad=math.random()
+local _nhvhgqf=math.random()
+local _obb = _G._obb
+local _obc = _G._obc
+local _obd = require(script.Parent:WaitForChild("Config"))
+local _obe = require(script.Parent.Callback:WaitForChild("Fly"))
+local _obf = require(script.Parent.Callback:WaitForChild("Movement"))
+local _obg = require(script.Parent.Callback:WaitForChild("Desync"))
+local _obh = require(script.Parent.Callback:WaitForChild("ESP"))
+local _obi = require(script.Parent.Callback:WaitForChild("Visual"))
+local _obj = require(script.Parent.Callback:WaitForChild("Aimbot"))
+local _obk = require(script.Parent.Callback:WaitForChild("SilentAimbot"))
+local _obl = Raknet or raknet
+_obf:Init()
+local _obm = _obc.Main:AddLeftGroupbox("Fly")
+_obm:AddToggle("UniversalFly", {
+Text    = "Enable Fly",
 Default = false,
 Callback = function(value)
-_e.Enabled = value
+_obe.Enabled = value
 if value then
-_e:Start()
-_b:Notify("_e enabled!", 2)
+_obe:Start()
+_obb:Notify("Fly enabled!", 2)
 else
-_e:Stop()
+_obe:Stop()
 end
 end,
 })
-_m:AddSlider("UniversalFlySpeed", {
+_obm:AddSlider("UniversalFlySpeed", {
 Text     = "Speed",
-Default  = _d._e.Speed,
+Default  = _obd._obe.Speed,
 Min      = 10,
 Max      = 200,
 Rounding = 1,
 Callback = function(value)
-_e:SetSpeed(value)
+_obe:SetSpeed(value)
 end,
 })
-_m:AddLabel("Keybind: F to toggle"):AddKeyPicker("UniversalFlyBind", {
-Default = _d._e.Keybind,
+_obm:AddLabel("Keybind: F to toggle"):AddKeyPicker("UniversalFlyBind", {
+Default = _obd._obe.Keybind,
 NoUI    = true,
 })
-local _n = _c.Main:AddRightGroupbox("🏃  _f")
-_n:AddSlider("UniversalWalkSpeed", {
+local _obn = _obc.Main:AddRightGroupbox("🏃  Movement")
+_obn:AddSlider("UniversalWalkSpeed", {
 Text     = "Walk Speed",
-Default  = _d._f.WalkSpeed,
+Default  = _obd._obf.WalkSpeed,
 Min      = 5,
 Max      = 100,
 Rounding = 1,
 Callback = function(value)
-_f:SetWalkSpeed(value)
+_obf:SetWalkSpeed(value)
 end,
 })
-_n:AddSlider("UniversalJumpPower", {
+_obn:AddSlider("UniversalJumpPower", {
 Text     = "Jump Power",
-Default  = _d._f.JumpPower,
+Default  = _obd._obf.JumpPower,
 Min      = 10,
 Max      = 150,
 Rounding = 1,
 Callback = function(value)
-_f:SetJumpPower(value)
+_obf:SetJumpPower(value)
 end,
 })
-_n:AddToggle("UniversalInfiniteJump", {
+_obn:AddToggle("UniversalInfiniteJump", {
 Text    = "Infinite Jump",
 Default = false,
 Callback = function(value)
 if value then
-_f:EnableInfiniteJump()
+_obf:EnableInfiniteJump()
 else
-_f:DisableInfiniteJump()
+_obf:DisableInfiniteJump()
 end
 end,
 })
-_n:AddToggle("UniversalTPWalk", {
+_obn:AddToggle("UniversalTPWalk", {
 Text    = "TP Walk",
 Default = false,
 Callback = function(value)
 if value then
-_f:EnableTPWalk()
+_obf:EnableTPWalk()
 else
-_f:DisableTPWalk()
+_obf:DisableTPWalk()
 end
 end,
 })
-_n:AddSlider("UniversalTPWalkSpeed", {
+_obn:AddSlider("UniversalTPWalkSpeed", {
 Text     = "TP Walk Speed (studs/s)",
-Default  = _d._f.TPWalkSpeed,
+Default  = _obd._obf.TPWalkSpeed,
 Min      = 20,
 Max      = 300,
 Rounding = 1,
 Callback = function(value)
-_f.TPWalkSpeed = value
+_obf.TPWalkSpeed = value
 end,
 })
-local _o = _c.Main:AddLeftGroupbox("_g (Raknet)")
-if _l then
-_o:AddToggle("UniversalDesync", {
-Text    = "Enable _g",
+local _obo = _obc.Main:AddLeftGroupbox("Desync (Raknet)")
+if _obl then
+_obo:AddToggle("UniversalDesync", {
+Text    = "Enable Desync",
 Default = false,
 Callback = function(value)
 if value then
-_g:Start()
+_obg:Start()
 else
-_g:Stop()
+_obg:Stop()
 end
 end,
 })
-_o:AddLabel("Keybind: U to toggle"):AddKeyPicker("UniversalDesyncBind", {
-Default = _d._g.Keybind,
+_obo:AddLabel("Keybind: U to toggle"):AddKeyPicker("UniversalDesyncBind", {
+Default = _obd._obg.Keybind,
 NoUI    = true,
 })
 else
-_o:AddLabel(getexecutorname() .. "Doesn't support Raknet _b, please try check again.")
+_obo:AddLabel(getexecutorname() .. "Doesn't support Raknet Library, please try check again.")
 end
-local _p = _c._i:AddLeftGroupbox("_h")
-_p:AddToggle("UniversalESP", {
-Text    = "Enable _h",
+local _obp = _obc._obi:AddLeftGroupbox("ESP")
+_obp:AddToggle("UniversalESP", {
+Text    = "Enable ESP",
 Default = false,
-C" .. "allback = function(v" .. "alue)
-_h.Enabled = v" .. "alue
+Callback = function(value)
+_obh.Enabled = value
 if value then
-_" .. "h:Start()
+_obh:Start()
 else
-_h:St" .. "op()
+_obh:Stop()
 end
 end,
 })
-_p:" .. "AddToggle("UniversalESPChams", {
+_obp:AddToggle("UniversalESPChams", {
 Text    = "Chams",
 Default = false,
-C" .. "allback = function(v" .. "alue)
-_h.Options.Cha" .. "ms = value
+Callback = function(value)
+_obh.Options.Chams = value
 end,
 })
-_" .. "p:AddColorPicker("UniversalESPChamsColor", {
-Default = _d._h." .. "ChamsColor,
-Title   " .. "= "Chams Color",
-Callback = functio" .. "n(value)
-_h.Options." .. "ChamsColor = value
-e" .. "nd,
+_obp:AddColorPicker("UniversalESPChamsColor", {
+Default = _obd._obh.ChamsColor,
+Title   = "Chams Color",
+Callback = function(value)
+_obh.Options.ChamsColor = value
+end,
 })
-_p:AddToggle("UniversalESPBox", {
+_obp:AddToggle("UniversalESPBox", {
 Text    = "Box",
 Default = false,
-C" .. "allback = function(v" .. "alue)
-_h.Options.Box" .. " = value
+Callback = function(value)
+_obh.Options.Box = value
 end,
 })
-_p:" .. "AddColorPicker("UniversalESPBoxColor", {
-Default = _d._h." .. "BoxColor,
+_obp:AddColorPicker("UniversalESPBoxColor", {
+Default = _obd._obh.BoxColor,
 Title   = "Box Color",
-Callback = functio" .. "n(value)
-_h.Options." .. "BoxColor = value
-end" .. ",
+Callback = function(value)
+_obh.Options.BoxColor = value
+end,
 })
-_p:AddToggle("UniversalESPHealthBar", {
+_obp:AddToggle("UniversalESPHealthBar", {
 Text    = "Health Bar",
 Default = false,
-C" .. "allback = function(v" .. "alue)
-_h.Options.Hea" .. "lthBar = value
+Callback = function(value)
+_obh.Options.HealthBar = value
 end,
-" .. "})
-_p:AddToggle("UniversalESPDistance", {
+})
+_obp:AddToggle("UniversalESPDistance", {
 Text    = "Distance",
 Default = false,
-C" .. "allback = function(v" .. "alue)
-_h.Options.Dis" .. "tance = value
+Callback = function(value)
+_obh.Options.Distance = value
 end,
-}" .. ")
-_p:AddToggle("UniversalESPName", {
+})
+_obp:AddToggle("UniversalESPName", {
 Text    = "Name",
 Default = false,
-C" .. "allback = function(v" .. "alue)
-_h.Options.Nam" .. "e = value
+Callback = function(value)
+_obh.Options.Name = value
 end,
 })
-_p" .. ":AddToggle("UniversalESPSkeleton", {
+_obp:AddToggle("UniversalESPSkeleton", {
 Text    = "Skeleton",
 Default = false,
-C" .. "allback = function(v" .. "alue)
-_h.Options.Ske" .. "leton = value
+Callback = function(value)
+_obh.Options.Skeleton = value
 end,
-}" .. ")
-_p:AddDivider()
-_p" .. ":AddToggle("UniversalESPTeamCheck", {
+})
+_obp:AddDivider()
+_obp:AddToggle("UniversalESPTeamCheck", {
 Text    = "Team Check",
-Default = _d._h.Te" .. "amCheck,
-Callback = " .. "function(value)
-_h.O" .. "ptions.TeamCheck = v" .. "alue
+Default = _obd._obh.TeamCheck,
+Callback = function(value)
+_obh.Options.TeamCheck = value
 end,
 })
-_p:AddT" .. "oggle("UniversalESPInvisibleCheck", {
+_obp:AddToggle("UniversalESPInvisibleCheck", {
 Text    = "Invisible Check",
-Default = _d._h.In" .. "visibleCheck,
-Callba" .. "ck = function(value)" .. "
-_h.Options.Invisibl" .. "eCheck = value
-end,
-" .. "})
-_p:AddToggle("UniversalESPHealthCheck", {
-Text    = "Health Check",
-Default = _d._h.He" .. "althCheck,
-Callback " .. "= function(value)
-_h" .. ".Options.HealthCheck" .. " = value
+Default = _obd._obh.InvisibleCheck,
+Callback = function(value)
+_obh.Options.InvisibleCheck = value
 end,
 })
-loc" .. "al _q = _c._i:AddRig" .. "htGroupbox("_i")
-_q:AddToggle("UniversalFullbright", {
+_obp:AddToggle("UniversalESPHealthCheck", {
+Text    = "Health Check",
+Default = _obd._obh.HealthCheck,
+Callback = function(value)
+_obh.Options.HealthCheck = value
+end,
+})
+local _obq = _obc._obi:AddRightGroupbox("Visual")
+_obq:AddToggle("UniversalFullbright", {
 Text    = "Enable Fullbright",
 Default = false,
-C" .. "allback = function(v" .. "alue)
+Callback = function(value)
 if value then
-" .. "_i:EnableFullbright(" .. ")
+_obi:EnableFullbright()
 else
-_i:DisableFul" .. "lbright()
+_obi:DisableFullbright()
 end
 end,
-}" .. ")
-_q:AddToggle("UniversalFPSBoost", {
+})
+_obq:AddToggle("UniversalFPSBoost", {
 Text    = "FPS Boost",
 Default = false,
-C" .. "allback = function(v" .. "alue)
+Callback = function(value)
 if value then
-" .. "_i:EnableFPSBoost()
-" .. "else
-_i:DisableFPSBo" .. "ost()
+_obi:EnableFPSBoost()
+else
+_obi:DisableFPSBoost()
 end
 end,
 })
-_q" .. ":AddToggle("UniversalXRay", {
+_obq:AddToggle("UniversalXRay", {
 Text    = "X-Ray",
 Default = false,
-C" .. "allback = function(v" .. "alue)
+Callback = function(value)
 if value then
-" .. "_i:EnableXRay()
-else" .. "
-_i:DisableXRay()
-en" .. "d
-end,
-})
-_q:AddSlid" .. "er("UniversalXRayTransparency", {
-Text     = "X-Ray Transparency",
-Default  = _d.XRay" .. ".Transparency,
-Min  " .. "    = 0,
-Max      = " .. "1,
-Rounding = 2,
-Cal" .. "lback = function(val" .. "ue)
-_i:SetXRayTransp" .. "arency(value)
-end,
-}" .. ")
-_q:AddLabel("Keybind: X to toggle"):AddKeyPicker("UniversalXRayBind", {
-Default = _d.XRa" .. "y.Keybind,
-NoUI    =" .. " true,
-})
-local _r =" .. " _c.Player:AddLeftGr" .. "oupbox("_j")
-_r:AddToggle("UniversalAimbot", {
-Text    = "Enable _j",
-Default = false,
-C" .. "allback = function(v" .. "alue)
-_j.Enabled = v" .. "alue
-if value then
-_" .. "j:Start()
+_obi:EnableXRay()
 else
-_j:St" .. "op()
+_obi:DisableXRay()
 end
 end,
 })
-_r:" .. "AddLabel("Hold Keybind"):AddKeyPicker("UniversalAimbotBind", {
-Default = _d._j." .. "Keybind,
-NoUI    = t" .. "rue,
+_obq:AddSlider("UniversalXRayTransparency", {
+Text     = "X-Ray Transparency",
+Default  = _obd.XRay.Transparency,
+Min      = 0,
+Max      = 1,
+Rounding = 2,
+Callback = function(value)
+_obi:SetXRayTransparency(value)
+end,
 })
-_r:AddDropdo" .. "wn("UniversalAimbotMethod", {
+_obq:AddLabel("Keybind: X to toggle"):AddKeyPicker("UniversalXRayBind", {
+Default = _obd.XRay.Keybind,
+NoUI    = true,
+})
+local _obr = _obc.Player:AddLeftGroupbox("Aimbot")
+_obr:AddToggle("UniversalAimbot", {
+Text    = "Enable Aimbot",
+Default = false,
+Callback = function(value)
+_obj.Enabled = value
+if value then
+_obj:Start()
+else
+_obj:Stop()
+end
+end,
+})
+_obr:AddLabel("Hold Keybind"):AddKeyPicker("UniversalAimbotBind", {
+Default = _obd._obj.Keybind,
+NoUI    = true,
+})
+_obr:AddDropdown("UniversalAimbotMethod", {
 Values  = { "Camera", "RootPart" },
 Default = 1,
 Text    = "Method",
-Callback = functio" .. "n(value)
-_j.Method =" .. " value
+Callback = function(value)
+_obj.Method = value
 end,
 })
-_r:Ad" .. "dSlider("UniversalAimbotSmoothness", {
+_obr:AddSlider("UniversalAimbotSmoothness", {
 Text     = "Smoothness",
-Default  = _d._j.S" .. "moothness,
-Min      " .. "= 1,
+Default  = _obd._obj.Smoothness,
+Min      = 1,
 Max      = 50,
-" .. "Rounding = 1,
-Callba" .. "ck = function(value)" .. "
-_j.Smoothness = val" .. "ue
+Rounding = 1,
+Callback = function(value)
+_obj.Smoothness = value
 end,
 })
-_r:AddDro" .. "pdown("UniversalAimbotLockPart", {
+_obr:AddDropdown("UniversalAimbotLockPart", {
 Values  = { "Head", "HumanoidRootPart", "Torso" },
 Default = 1,
 Text    = "Lock Part",
-Callback = functio" .. "n(value)
-_j.LockPart" .. " = value
+Callback = function(value)
+_obj.LockPart = value
 end,
 })
-_r:" .. "AddSlider("UniversalAimbotShotChance", {
+_obr:AddSlider("UniversalAimbotShotChance", {
 Text     = "Shot Chance (%)",
-Default  = _d._j.S" .. "hotChance,
-Min      " .. "= 0,
-Max      = 100," .. "
-Rounding = 1,
-Callb" .. "ack = function(value" .. ")
-_j.ShotChance = va" .. "lue
-end,
-})
-_r:AddDi" .. "vider()
-_r:AddLabel("FOV Settings")
-_r:AddSlider("UniversalAimbotFOVRadius", {
-Text     = "FOV Radius",
-Default  = _d._j.F" .. "OVRadius,
-Min      =" .. " 20,
-Max      = 500," .. "
-Rounding = 1,
-Callb" .. "ack = function(value" .. ")
-_j.FOVRadius = val" .. "ue
-if _j.FOVCircle t" .. "hen
-_j.FOVCircle.Rad" .. "ius = value
-end
-end," .. "
-})
-_r:AddSlider("UniversalAimbotFOVDistance", {
-Text     = "FOV Distance",
-Default  = _d._j.F" .. "OVDistance,
-Min     " .. " = 100,
-Max      = 1" .. "000,
-Rounding = 10,
-" .. "Callback = function(" .. "value)
-_j.FOVDistanc" .. "e = value
-end,
-})
-_r" .. ":AddSlider("UniversalAimbotFOVOutlineTransparency", {
-Text     = "FOV Outline Transparency",
-Default  = _d._j.F" .. "OVOutlineTransparenc" .. "y,
+Default  = _obd._obj.ShotChance,
 Min      = 0,
-Max" .. "      = 1,
-Rounding " .. "= 2,
-})
-_r:AddSlider" .. "("UniversalAimbotFOVFillTransparency", {
-Text     = "FOV Fill Transparency",
-Default  = _d._j.F" .. "OVFillTransparency,
-" .. "Min      = 0,
-Max   " .. "   = 1,
-Rounding = 2" .. ",
-})
-_r:AddColorPick" .. "er("UniversalAimbotFOVColor", {
-Default = _d._j." .. "FOVColor,
-Title   = "FOV Color",
-Callback = functio" .. "n(value)
-if _j.FOVCi" .. "rcle then
-_j.FOVCirc" .. "le.Color = value
-end" .. "
+Max      = 100,
+Rounding = 1,
+Callback = function(value)
+_obj.ShotChance = value
 end,
 })
-local _s = " .. "_c.Player:AddRightGr" .. "oupbox("🔇  Silent _j")
-_s:AddToggle("UniversalSilentAimbot", {
-Text    = "Enable Silent _j",
+_obr:AddDivider()
+_obr:AddLabel("FOV Settings")
+_obr:AddSlider("UniversalAimbotFOVRadius", {
+Text     = "FOV Radius",
+Default  = _obd._obj.FOVRadius,
+Min      = 20,
+Max      = 500,
+Rounding = 1,
+Callback = function(value)
+_obj.FOVRadius = value
+if _obj.FOVCircle then
+_obj.FOVCircle.Radius = value
+end
+end,
+})
+_obr:AddSlider("UniversalAimbotFOVDistance", {
+Text     = "FOV Distance",
+Default  = _obd._obj.FOVDistance,
+Min      = 100,
+Max      = 1000,
+Rounding = 10,
+Callback = function(value)
+_obj.FOVDistance = value
+end,
+})
+_obr:AddSlider("UniversalAimbotFOVOutlineTransparency", {
+Text     = "FOV Outline Transparency",
+Default  = _obd._obj.FOVOutlineTransparency,
+Min      = 0,
+Max      = 1,
+Rounding = 2,
+})
+_obr:AddSlider("UniversalAimbotFOVFillTransparency", {
+Text     = "FOV Fill Transparency",
+Default  = _obd._obj.FOVFillTransparency,
+Min      = 0,
+Max      = 1,
+Rounding = 2,
+})
+_obr:AddColorPicker("UniversalAimbotFOVColor", {
+Default = _obd._obj.FOVColor,
+Title   = "FOV Color",
+Callback = function(value)
+if _obj.FOVCircle then
+_obj.FOVCircle.Color = value
+end
+end,
+})
+local _obs = _obc.Player:AddRightGroupbox("🔇  Silent Aimbot")
+_obs:AddToggle("UniversalSilentAimbot", {
+Text    = "Enable Silent Aimbot",
 Default = false,
-C" .. "allback = function(v" .. "alue)
-_k.Enabled = v" .. "alue
+Callback = function(value)
+_obk.Enabled = value
 if value then
-_" .. "k:Start()
+_obk:Start()
 else
-_k:St" .. "op()
+_obk:Stop()
 end
 end,
 })
-_s:" .. "AddSlider("UniversalSilentAimbotShotChance", {
+_obs:AddSlider("UniversalSilentAimbotShotChance", {
 Text     = "Shot Chance (%)",
-Default  = _d._k.S" .. "hotChance,
-Min      " .. "= 0,
-Max      = 100," .. "
-Rounding = 1,
-Callb" .. "ack = function(value" .. ")
-_k.ShotChance = va" .. "lue
-end,
-})
-_s:AddSl" .. "ider("UniversalSilentAimbotHeadshotChance", {
-Text     = "Headshot Chance (%)",
-Default  = _d._k.H" .. "eadshotChance,
-Min  " .. "    = 0,
-Max      = " .. "100,
-Rounding = 1,
-C" .. "allback = function(v" .. "alue)
-_k.HeadshotCha" .. "nce = value
-end,
-})
-" .. "_s:AddLabel("FOV Settings")
-_s:AddSlider("UniversalSilentAimbotFOVRadius", {
-Text     = "FOV Radius",
-Default  = _d._k.F" .. "OVRadius,
-Min      =" .. " 20,
-Max      = 500," .. "
-Rounding = 1,
-Callb" .. "ack = function(value" .. ")
-_k.FOVRadius = val" .. "ue
-end,
-})
-_s:AddSli" .. "der("UniversalSilentAimbotFOVDistance", {
-Text     = "FOV Distance",
-Default  = _d._k.F" .. "OVDistance,
-Min     " .. " = 100,
-Max      = 1" .. "000,
-Rounding = 10,
-" .. "Callback = function(" .. "value)
-_k.FOVDistanc" .. "e = value
-end,
-})
-_s" .. ":AddSlider("UniversalSilentAimbotFOVOutlineTransparency", {
-Text     = "FOV Outline Transparency",
-Default  = _d._k.F" .. "OVOutlineTransparenc" .. "y,
+Default  = _obd._obk.ShotChance,
 Min      = 0,
-Max" .. "      = 1,
-Rounding " .. "= 2,
+Max      = 100,
+Rounding = 1,
+Callback = function(value)
+_obk.ShotChance = value
+end,
 })
-_s:AddSlider" .. "("UniversalSilentAimbotFOVFillTransparency", {
+_obs:AddSlider("UniversalSilentAimbotHeadshotChance", {
+Text     = "Headshot Chance (%)",
+Default  = _obd._obk.HeadshotChance,
+Min      = 0,
+Max      = 100,
+Rounding = 1,
+Callback = function(value)
+_obk.HeadshotChance = value
+end,
+})
+_obs:AddLabel("FOV Settings")
+_obs:AddSlider("UniversalSilentAimbotFOVRadius", {
+Text     = "FOV Radius",
+Default  = _obd._obk.FOVRadius,
+Min      = 20,
+Max      = 500,
+Rounding = 1,
+Callback = function(value)
+_obk.FOVRadius = value
+end,
+})
+_obs:AddSlider("UniversalSilentAimbotFOVDistance", {
+Text     = "FOV Distance",
+Default  = _obd._obk.FOVDistance,
+Min      = 100,
+Max      = 1000,
+Rounding = 10,
+Callback = function(value)
+_obk.FOVDistance = value
+end,
+})
+_obs:AddSlider("UniversalSilentAimbotFOVOutlineTransparency", {
+Text     = "FOV Outline Transparency",
+Default  = _obd._obk.FOVOutlineTransparency,
+Min      = 0,
+Max      = 1,
+Rounding = 2,
+})
+_obs:AddSlider("UniversalSilentAimbotFOVFillTransparency", {
 Text     = "FOV Fill Transparency",
-Default  = _d._k.F" .. "OVFillTransparency,
-" .. "Min      = 0,
-Max   " .. "   = 1,
-Rounding = 2" .. ",
+Default  = _obd._obk.FOVFillTransparency,
+Min      = 0,
+Max      = 1,
+Rounding = 2,
 })
-_s:AddColorPick" .. "er("UniversalSilentAimbotFOVColor", {
-Default = _d._k." .. "FOVColor,
+_obs:AddColorPicker("UniversalSilentAimbotFOVColor", {
+Default = _obd._obk.FOVColor,
 Title   = "FOV Color",
 })
-_b:Notify("Universal hacks loaded!", 3)
+_obb:Notify("Universal hacks loaded!", 3)
