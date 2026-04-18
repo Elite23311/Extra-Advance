@@ -1,12 +1,35 @@
 --   loadstring(game:HttpGet("https://raw.githubusercontent.com/Elite23311/Extra-Advance/main/Loader.lua"))()
 
 -- ─── GITHUB PAT CONFIGURATION ───────────────────────────────
--- For PRIVATE repos: Generate PAT at github.com/settings/tokens
--- Set YOUR_PAT_TOKEN below. For public repos, leave empty string.
-local PAT_TOKEN = "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"  -- Paste your GitHub PAT here for private repos
+-- Generate at: github.com/settings/tokens (classic) or github.com/settings/personal-access-tokens (fine-grained)
+-- Fine-grained PATs work better with Roblox's HttpGet
+-- For public repos, leave empty string.
+local PAT_TOKEN = "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"  -- Paste your GitHub PAT here
 
-local RAW = "https://" .. (PAT_TOKEN ~= "" and PAT_TOKEN .. "@" or "") .. "raw.githubusercontent.com/Elite23311/Extra-Advance/main/"
+local RAW
+if PAT_TOKEN ~= "" then
+    RAW = "https://" .. PAT_TOKEN .. "@raw.githubusercontent.com/Elite23311/Extra-Advance/main/"
+else
+    RAW = "https://raw.githubusercontent.com/Elite23311/Extra-Advance/main/"
+end
+
+local function testAccess()
+    local ok, result = pcall(function()
+        return game:HttpGet(RAW .. "Loader.lua")
+    end)
+    if not ok or (result and result:find("404")) or (result and result:find("401")) then
+        warn("[EA] PAT Authentication Failed!")
+        warn("[EA] If using Classic PAT, try Fine-Grained PAT instead")
+        warn("[EA] Generate at: github.com/settings/personal-access-tokens")
+        return false
+    end
+    return true
+end
 local repo = "https://raw.githubusercontent.com/violin-suzutsuki/LinoriaLib/main/"
+
+if PAT_TOKEN ~= "" and not testAccess() then
+    error("[EA] Failed to authenticate with PAT. Please screenshot these console and report to EA developer.")
+end
 
 local Library      = loadstring(game:HttpGet(repo .. "Library.lua"))()
 local ThemeManager = loadstring(game:HttpGet(repo .. "addons/ThemeManager.lua"))()
@@ -57,11 +80,8 @@ _G.Options = Options
 local KeySystem = loadstring(game:HttpGet(RAW .. "KeySystem.lua"))()
 
 KeySystem.Init(function()
-    -- Callback after authentication
-    -- Always load Universal hacks
     loadPath("Games/Universal/Main.lua")
     
-    -- Load game-specific hacks if available
     local route = GameRoutes[game.PlaceId]
     if route then
         loadPath(route)
