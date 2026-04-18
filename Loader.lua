@@ -1,15 +1,7 @@
---   loadstring(game:HttpGet("https://raw.githubusercontent.com/Elite23311/Extra-Advance/main/Loader.lua"))()
-
-<<<<<<< HEAD
--- ─── GITHUB PAT CONFIGURATION ───────────────────────────────
--- For PRIVATE repos: Generate PAT at github.com/settings/tokens
--- Set YOUR_PAT_TOKEN below. For public repos, leave empty string.
-local PAT_TOKEN = ""  -- Paste your GitHub PAT here for private repos
+--   loadstring(game:HttpGet("https://raw.githubusercontent.com/Elite23311/Extra-Advance/main/Loader.lua"))().
+local PAT_TOKEN = "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"
 
 local RAW = "https://" .. (PAT_TOKEN ~= "" and PAT_TOKEN .. "@" or "") .. "raw.githubusercontent.com/Elite23311/Extra-Advance/main/"
-=======
-local RAW = "https://raw.githubusercontent.com/Elite23311/Extra-Advance/main/"
->>>>>>> dda9fe05e72d33dd8cdda397e33609075fb5d534
 local repo = "https://raw.githubusercontent.com/violin-suzutsuki/LinoriaLib/main/"
 
 local Library      = loadstring(game:HttpGet(repo .. "Library.lua"))()
