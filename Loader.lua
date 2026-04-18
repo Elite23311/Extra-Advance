@@ -3,7 +3,7 @@
 -- ─── GITHUB PAT CONFIGURATION ───────────────────────────────
 -- For PRIVATE repos: Generate PAT at github.com/settings/tokens
 -- Set YOUR_PAT_TOKEN below. For public repos, leave empty string.
-local PAT_TOKEN = "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"
+local PAT_TOKEN = "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"  -- Paste your GitHub PAT here for private repos
 
 local RAW = "https://" .. (PAT_TOKEN ~= "" and PAT_TOKEN .. "@" or "") .. "raw.githubusercontent.com/Elite23311/Extra-Advance/main/"
 local repo = "https://raw.githubusercontent.com/violin-suzutsuki/LinoriaLib/main/"
