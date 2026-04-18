@@ -1,1 +1,0 @@
-local _ncUhvKQhh_bwB=math.random(); local reVpRWUH ={}reVpRWUH.JhoRvQReAY ={NqVlTiqyr       = false,puUGzqefloA           = 120,hge_vqjvUnXK    = 12,pnrPTbIjqZ    = "cswEoMVwZQ",ehUgwMqq = true,njQJEdsbq   = true,UNSsTmGMr       = true,KdvklIbaTMPs      = Color3.xxydelgogqf(255,255,255),wEbFoiUTR       = "oIUuiTFPRwsc",} return reVpRWUH
