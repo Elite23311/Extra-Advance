@@ -1,6 +1,6 @@
---   loadstring(game:HttpGet("https://raw.githubusercontent.com/YOUR_USER/YOUR_REPO/main/Loader.lua"))()
+--   loadstring(game:HttpGet("https://raw.githubusercontent.com/Elite23311/Extra-Advance/main/Loader.lua"))()
 
-local RAW = "https://raw.githubusercontent.com/YOUR_USER/YOUR_REPO/main/"
+local RAW = "https://raw.githubusercontent.com/Elite23311/Extra-Advance/main/"
 local repo = "https://raw.githubusercontent.com/violin-suzutsuki/LinoriaLib/main/"
 
 local Library      = loadstring(game:HttpGet(repo .. "Library.lua"))()
