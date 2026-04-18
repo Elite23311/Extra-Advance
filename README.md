@@ -292,4 +292,5 @@ Options.ID:GetState()  -- true/false
 - Always create **all UI elements first**, then set up `:OnChanged` callbacks after. This is the LinoriaLib-recommended pattern.
 - `SaveManager:LoadAutoloadConfig()` must be called **last** so all elements exist before config values are applied.
 #   E x t r a - A d v a n c e  
+ #   E x t r a - A d v a n c e  
  
