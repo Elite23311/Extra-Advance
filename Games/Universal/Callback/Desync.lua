@@ -41,7 +41,7 @@ function Desync:Start()
     
     if pcall(function() raknet.add_send_hook(rakhook) end) then
         if Library then
-            Library:Notify("🌀 Desync enabled!", 2)
+            Library:Notify("Desync enabled!", 2)
         end
     end
 
@@ -86,7 +86,7 @@ function Desync:Stop()
     
     if pcall(function() raknet.remove_send_hook(rakhook) end) then
         if Library then
-            Library:Notify("🌀 Desync disabled!", 2)
+            Library:Notify("Desync disabled!", 2)
         end
     end
     

@@ -15,6 +15,8 @@ local Visual = require(script.Parent.Callback:WaitForChild("Visual"))
 local Aimbot = require(script.Parent.Callback:WaitForChild("Aimbot"))
 local SilentAimbot = require(script.Parent.Callback:WaitForChild("SilentAimbot"))
 
+local IsRaknetSupported = Raknet or raknet
+
 -- Initialize movement first
 Movement:Init()
 
@@ -22,7 +24,7 @@ Movement:Init()
 -- MAIN TAB - Movement & Hacks
 -- ──────────────────────────────────────────
 
-local MainBox = Tabs.Main:AddLeftGroupbox("💫  Fly")
+local MainBox = Tabs.Main:AddLeftGroupbox("Fly")
 MainBox:AddToggle("UniversalFly", {
     Text    = "Enable Fly",
     Default = false,
@@ -112,31 +114,34 @@ MovementBox:AddSlider("UniversalTPWalkSpeed", {
     end,
 })
 
-local DesyncBox = Tabs.Main:AddLeftGroupbox("🌀  Desync (Raknet)")
+local DesyncBox = Tabs.Main:AddLeftGroupbox("Desync (Raknet)")
 
-DesyncBox:AddToggle("UniversalDesync", {
+if IsRaknetSupported then
+    DesyncBox:AddToggle("UniversalDesync", {
     Text    = "Enable Desync",
     Default = false,
     Callback = function(value)
         if value then
             Desync:Start()
-            Library:Notify("Desync enabled!", 2)
         else
             Desync:Stop()
         end
     end,
-})
+    })
 
-DesyncBox:AddLabel("Keybind: U to toggle"):AddKeyPicker("UniversalDesyncBind", {
+    DesyncBox:AddLabel("Keybind: U to toggle"):AddKeyPicker("UniversalDesyncBind", {
     Default = Config.Desync.Keybind,
     NoUI    = true,
-})
+    })
+else
+    DesyncBox:AddLabel(getexecutorname() .. "Doesn't support Raknet Library, please try check again.")
+end
 
 -- ──────────────────────────────────────────
 -- VISUAL TAB
 -- ──────────────────────────────────────────
 
-local ESPBox = Tabs.Visual:AddLeftGroupbox("👁️  ESP")
+local ESPBox = Tabs.Visual:AddLeftGroupbox("ESP")
 
 ESPBox:AddToggle("UniversalESP", {
     Text    = "Enable ESP",
@@ -241,7 +246,7 @@ ESPBox:AddToggle("UniversalESPHealthCheck", {
     end,
 })
 
-local VisualBox = Tabs.Visual:AddRightGroupbox("✨  Visual")
+local VisualBox = Tabs.Visual:AddRightGroupbox("Visual")
 
 VisualBox:AddToggle("UniversalFullbright", {
     Text    = "Enable Fullbright",
@@ -299,7 +304,7 @@ VisualBox:AddLabel("Keybind: X to toggle"):AddKeyPicker("UniversalXRayBind", {
 -- COMBAT TAB
 -- ──────────────────────────────────────────
 
-local AimbotBox = Tabs.Player:AddLeftGroupbox("🎯  Aimbot")
+local AimbotBox = Tabs.Player:AddLeftGroupbox("Aimbot")
 
 AimbotBox:AddToggle("UniversalAimbot", {
     Text    = "Enable Aimbot",
