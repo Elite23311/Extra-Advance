@@ -1,0 +1,497 @@
+-- ╔══════════════════════════════════════════╗
+-- ║   Games/Universal/Main.lua               ║
+-- ║  Universal hacks UI and loader           ║
+-- ╚══════════════════════════════════════════╝
+
+local Library = _G.Library
+local Tabs = _G.Tabs
+
+local Config = require(script.Parent:WaitForChild("Config"))
+local Fly = require(script.Parent.Callback:WaitForChild("Fly"))
+local Movement = require(script.Parent.Callback:WaitForChild("Movement"))
+local Desync = require(script.Parent.Callback:WaitForChild("Desync"))
+local ESP = require(script.Parent.Callback:WaitForChild("ESP"))
+local Visual = require(script.Parent.Callback:WaitForChild("Visual"))
+local Aimbot = require(script.Parent.Callback:WaitForChild("Aimbot"))
+local SilentAimbot = require(script.Parent.Callback:WaitForChild("SilentAimbot"))
+
+-- Initialize movement first
+Movement:Init()
+
+-- ──────────────────────────────────────────
+-- MAIN TAB - Movement & Hacks
+-- ──────────────────────────────────────────
+
+local MainBox = Tabs.Main:AddLeftGroupbox("💫  Fly")
+MainBox:AddToggle("UniversalFly", {
+    Text    = "Enable Fly",
+    Default = false,
+    Callback = function(value)
+        Fly.Enabled = value
+        if value then
+            Fly:Start()
+            Library:Notify("Fly enabled!", 2)
+        else
+            Fly:Stop()
+        end
+    end,
+})
+
+MainBox:AddSlider("UniversalFlySpeed", {
+    Text     = "Speed",
+    Default  = Config.Fly.Speed,
+    Min      = 10,
+    Max      = 200,
+    Rounding = 1,
+    Callback = function(value)
+        Fly:SetSpeed(value)
+    end,
+})
+
+MainBox:AddLabel("Keybind: F to toggle"):AddKeyPicker("UniversalFlyBind", {
+    Default = Config.Fly.Keybind,
+    NoUI    = true,
+})
+
+local MovementBox = Tabs.Main:AddRightGroupbox("🏃  Movement")
+
+MovementBox:AddSlider("UniversalWalkSpeed", {
+    Text     = "Walk Speed",
+    Default  = Config.Movement.WalkSpeed,
+    Min      = 5,
+    Max      = 100,
+    Rounding = 1,
+    Callback = function(value)
+        Movement:SetWalkSpeed(value)
+    end,
+})
+
+MovementBox:AddSlider("UniversalJumpPower", {
+    Text     = "Jump Power",
+    Default  = Config.Movement.JumpPower,
+    Min      = 10,
+    Max      = 150,
+    Rounding = 1,
+    Callback = function(value)
+        Movement:SetJumpPower(value)
+    end,
+})
+
+MovementBox:AddToggle("UniversalInfiniteJump", {
+    Text    = "Infinite Jump",
+    Default = false,
+    Callback = function(value)
+        if value then
+            Movement:EnableInfiniteJump()
+        else
+            Movement:DisableInfiniteJump()
+        end
+    end,
+})
+
+MovementBox:AddToggle("UniversalTPWalk", {
+    Text    = "TP Walk",
+    Default = false,
+    Callback = function(value)
+        if value then
+            Movement:EnableTPWalk()
+        else
+            Movement:DisableTPWalk()
+        end
+    end,
+})
+
+MovementBox:AddSlider("UniversalTPWalkSpeed", {
+    Text     = "TP Walk Speed (studs/s)",
+    Default  = Config.Movement.TPWalkSpeed,
+    Min      = 20,
+    Max      = 300,
+    Rounding = 1,
+    Callback = function(value)
+        Movement.TPWalkSpeed = value
+    end,
+})
+
+local DesyncBox = Tabs.Main:AddLeftGroupbox("🌀  Desync (Raknet)")
+
+DesyncBox:AddToggle("UniversalDesync", {
+    Text    = "Enable Desync",
+    Default = false,
+    Callback = function(value)
+        if value then
+            Desync:Start()
+            Library:Notify("Desync enabled!", 2)
+        else
+            Desync:Stop()
+        end
+    end,
+})
+
+DesyncBox:AddLabel("Keybind: U to toggle"):AddKeyPicker("UniversalDesyncBind", {
+    Default = Config.Desync.Keybind,
+    NoUI    = true,
+})
+
+-- ──────────────────────────────────────────
+-- VISUAL TAB
+-- ──────────────────────────────────────────
+
+local ESPBox = Tabs.Visual:AddLeftGroupbox("👁️  ESP")
+
+ESPBox:AddToggle("UniversalESP", {
+    Text    = "Enable ESP",
+    Default = false,
+    Callback = function(value)
+        ESP.Enabled = value
+        if value then
+            ESP:Start()
+        else
+            ESP:Stop()
+        end
+    end,
+})
+
+ESPBox:AddToggle("UniversalESPChams", {
+    Text    = "Chams",
+    Default = false,
+    Callback = function(value)
+        ESP.Options.Chams = value
+    end,
+})
+
+ESPBox:AddColorPicker("UniversalESPChamsColor", {
+    Default = Config.ESP.ChamsColor,
+    Title   = "Chams Color",
+    Callback = function(value)
+        ESP.Options.ChamsColor = value
+    end,
+})
+
+ESPBox:AddToggle("UniversalESPBox", {
+    Text    = "Box",
+    Default = false,
+    Callback = function(value)
+        ESP.Options.Box = value
+    end,
+})
+
+ESPBox:AddColorPicker("UniversalESPBoxColor", {
+    Default = Config.ESP.BoxColor,
+    Title   = "Box Color",
+    Callback = function(value)
+        ESP.Options.BoxColor = value
+    end,
+})
+
+ESPBox:AddToggle("UniversalESPHealthBar", {
+    Text    = "Health Bar",
+    Default = false,
+    Callback = function(value)
+        ESP.Options.HealthBar = value
+    end,
+})
+
+ESPBox:AddToggle("UniversalESPDistance", {
+    Text    = "Distance",
+    Default = false,
+    Callback = function(value)
+        ESP.Options.Distance = value
+    end,
+})
+
+ESPBox:AddToggle("UniversalESPName", {
+    Text    = "Name",
+    Default = false,
+    Callback = function(value)
+        ESP.Options.Name = value
+    end,
+})
+
+ESPBox:AddToggle("UniversalESPSkeleton", {
+    Text    = "Skeleton",
+    Default = false,
+    Callback = function(value)
+        ESP.Options.Skeleton = value
+    end,
+})
+
+ESPBox:AddDivider()
+
+ESPBox:AddToggle("UniversalESPTeamCheck", {
+    Text    = "Team Check",
+    Default = Config.ESP.TeamCheck,
+    Callback = function(value)
+        ESP.Options.TeamCheck = value
+    end,
+})
+
+ESPBox:AddToggle("UniversalESPInvisibleCheck", {
+    Text    = "Invisible Check",
+    Default = Config.ESP.InvisibleCheck,
+    Callback = function(value)
+        ESP.Options.InvisibleCheck = value
+    end,
+})
+
+ESPBox:AddToggle("UniversalESPHealthCheck", {
+    Text    = "Health Check",
+    Default = Config.ESP.HealthCheck,
+    Callback = function(value)
+        ESP.Options.HealthCheck = value
+    end,
+})
+
+local VisualBox = Tabs.Visual:AddRightGroupbox("✨  Visual")
+
+VisualBox:AddToggle("UniversalFullbright", {
+    Text    = "Enable Fullbright",
+    Default = false,
+    Callback = function(value)
+        if value then
+            Visual:EnableFullbright()
+        else
+            Visual:DisableFullbright()
+        end
+    end,
+})
+
+VisualBox:AddToggle("UniversalFPSBoost", {
+    Text    = "FPS Boost",
+    Default = false,
+    Callback = function(value)
+        if value then
+            Visual:EnableFPSBoost()
+        else
+            Visual:DisableFPSBoost()
+        end
+    end,
+})
+
+VisualBox:AddToggle("UniversalXRay", {
+    Text    = "X-Ray",
+    Default = false,
+    Callback = function(value)
+        if value then
+            Visual:EnableXRay()
+        else
+            Visual:DisableXRay()
+        end
+    end,
+})
+
+VisualBox:AddSlider("UniversalXRayTransparency", {
+    Text     = "X-Ray Transparency",
+    Default  = Config.XRay.Transparency,
+    Min      = 0,
+    Max      = 1,
+    Rounding = 2,
+    Callback = function(value)
+        Visual:SetXRayTransparency(value)
+    end,
+})
+
+VisualBox:AddLabel("Keybind: X to toggle"):AddKeyPicker("UniversalXRayBind", {
+    Default = Config.XRay.Keybind,
+    NoUI    = true,
+})
+
+-- ──────────────────────────────────────────
+-- COMBAT TAB
+-- ──────────────────────────────────────────
+
+local AimbotBox = Tabs.Player:AddLeftGroupbox("🎯  Aimbot")
+
+AimbotBox:AddToggle("UniversalAimbot", {
+    Text    = "Enable Aimbot",
+    Default = false,
+    Callback = function(value)
+        Aimbot.Enabled = value
+        if value then
+            Aimbot:Start()
+        else
+            Aimbot:Stop()
+        end
+    end,
+})
+
+AimbotBox:AddLabel("Hold Keybind"):AddKeyPicker("UniversalAimbotBind", {
+    Default = Config.Aimbot.Keybind,
+    NoUI    = true,
+})
+
+AimbotBox:AddDropdown("UniversalAimbotMethod", {
+    Values  = { "Camera", "RootPart" },
+    Default = 1,
+    Text    = "Method",
+    Callback = function(value)
+        Aimbot.Method = value
+    end,
+})
+
+AimbotBox:AddSlider("UniversalAimbotSmoothness", {
+    Text     = "Smoothness",
+    Default  = Config.Aimbot.Smoothness,
+    Min      = 1,
+    Max      = 50,
+    Rounding = 1,
+    Callback = function(value)
+        Aimbot.Smoothness = value
+    end,
+})
+
+AimbotBox:AddDropdown("UniversalAimbotLockPart", {
+    Values  = { "Head", "HumanoidRootPart", "Torso" },
+    Default = 1,
+    Text    = "Lock Part",
+    Callback = function(value)
+        Aimbot.LockPart = value
+    end,
+})
+
+AimbotBox:AddSlider("UniversalAimbotShotChance", {
+    Text     = "Shot Chance (%)",
+    Default  = Config.Aimbot.ShotChance,
+    Min      = 0,
+    Max      = 100,
+    Rounding = 1,
+    Callback = function(value)
+        Aimbot.ShotChance = value
+    end,
+})
+
+AimbotBox:AddDivider()
+
+AimbotBox:AddLabel("FOV Settings")
+AimbotBox:AddSlider("UniversalAimbotFOVRadius", {
+    Text     = "FOV Radius",
+    Default  = Config.Aimbot.FOVRadius,
+    Min      = 20,
+    Max      = 500,
+    Rounding = 1,
+    Callback = function(value)
+        Aimbot.FOVRadius = value
+        if Aimbot.FOVCircle then
+            Aimbot.FOVCircle.Radius = value
+        end
+    end,
+})
+
+AimbotBox:AddSlider("UniversalAimbotFOVDistance", {
+    Text     = "FOV Distance",
+    Default  = Config.Aimbot.FOVDistance,
+    Min      = 100,
+    Max      = 1000,
+    Rounding = 10,
+    Callback = function(value)
+        Aimbot.FOVDistance = value
+    end,
+})
+
+AimbotBox:AddSlider("UniversalAimbotFOVOutlineTransparency", {
+    Text     = "FOV Outline Transparency",
+    Default  = Config.Aimbot.FOVOutlineTransparency,
+    Min      = 0,
+    Max      = 1,
+    Rounding = 2,
+})
+
+AimbotBox:AddSlider("UniversalAimbotFOVFillTransparency", {
+    Text     = "FOV Fill Transparency",
+    Default  = Config.Aimbot.FOVFillTransparency,
+    Min      = 0,
+    Max      = 1,
+    Rounding = 2,
+})
+
+AimbotBox:AddColorPicker("UniversalAimbotFOVColor", {
+    Default = Config.Aimbot.FOVColor,
+    Title   = "FOV Color",
+    Callback = function(value)
+        if Aimbot.FOVCircle then
+            Aimbot.FOVCircle.Color = value
+        end
+    end,
+})
+
+local SilentAimbotBox = Tabs.Player:AddRightGroupbox("🔇  Silent Aimbot")
+
+SilentAimbotBox:AddToggle("UniversalSilentAimbot", {
+    Text    = "Enable Silent Aimbot",
+    Default = false,
+    Callback = function(value)
+        SilentAimbot.Enabled = value
+        if value then
+            SilentAimbot:Start()
+        else
+            SilentAimbot:Stop()
+        end
+    end,
+})
+
+SilentAimbotBox:AddSlider("UniversalSilentAimbotShotChance", {
+    Text     = "Shot Chance (%)",
+    Default  = Config.SilentAimbot.ShotChance,
+    Min      = 0,
+    Max      = 100,
+    Rounding = 1,
+    Callback = function(value)
+        SilentAimbot.ShotChance = value
+    end,
+})
+
+SilentAimbotBox:AddSlider("UniversalSilentAimbotHeadshotChance", {
+    Text     = "Headshot Chance (%)",
+    Default  = Config.SilentAimbot.HeadshotChance,
+    Min      = 0,
+    Max      = 100,
+    Rounding = 1,
+    Callback = function(value)
+        SilentAimbot.HeadshotChance = value
+    end,
+})
+
+SilentAimbotBox:AddLabel("FOV Settings")
+SilentAimbotBox:AddSlider("UniversalSilentAimbotFOVRadius", {
+    Text     = "FOV Radius",
+    Default  = Config.SilentAimbot.FOVRadius,
+    Min      = 20,
+    Max      = 500,
+    Rounding = 1,
+    Callback = function(value)
+        SilentAimbot.FOVRadius = value
+    end,
+})
+
+SilentAimbotBox:AddSlider("UniversalSilentAimbotFOVDistance", {
+    Text     = "FOV Distance",
+    Default  = Config.SilentAimbot.FOVDistance,
+    Min      = 100,
+    Max      = 1000,
+    Rounding = 10,
+    Callback = function(value)
+        SilentAimbot.FOVDistance = value
+    end,
+})
+
+SilentAimbotBox:AddSlider("UniversalSilentAimbotFOVOutlineTransparency", {
+    Text     = "FOV Outline Transparency",
+    Default  = Config.SilentAimbot.FOVOutlineTransparency,
+    Min      = 0,
+    Max      = 1,
+    Rounding = 2,
+})
+
+SilentAimbotBox:AddSlider("UniversalSilentAimbotFOVFillTransparency", {
+    Text     = "FOV Fill Transparency",
+    Default  = Config.SilentAimbot.FOVFillTransparency,
+    Min      = 0,
+    Max      = 1,
+    Rounding = 2,
+})
+
+SilentAimbotBox:AddColorPicker("UniversalSilentAimbotFOVColor", {
+    Default = Config.SilentAimbot.FOVColor,
+    Title   = "FOV Color",
+})
+
+Library:Notify("Universal hacks loaded!", 3)
