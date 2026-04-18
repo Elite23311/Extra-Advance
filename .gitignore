@@ -1,0 +1,38 @@
+# Extra Advance - Build System Configuration
+
+# Source code (readable, for local development)
+Source/
+
+# Build backups
+Build_Backup/
+BuildTools/
+
+# IDE and editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*.swn
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+
+# Documentation (keep private, don't push to public repo)
+*.md
+
+# Build scripts (keep private)
+*.bat
+*.ps1
+*.sh
+
+# Never commit these to GitHub
+# (only obfuscated versions should be public)
+
+# Keep these rules in .gitignore
+# This ensures only obfuscated code goes to GitHub
