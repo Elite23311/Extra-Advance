@@ -7,8 +7,8 @@
 2. Copy this script:
 
 ```lua
-getgenv().scriptkey = "EAtest";
-loadstring(game:HttpGet("https://raw.githubusercontent.com/Elite23311/Extra-Advance/main/Loader.lua"))()
+getgenv().scriptkey = "eatest";
+loadstring(game:HttpGet("https://raw.githubusercontent.com/Elite23311/Extra-Advance/main/Main/Loader.lua"))()
 ```
 
 3. Execute the script in the game.
