@@ -7,6 +7,11 @@ local Library      = loadstring(game:HttpGet(repo .. "Library.lua"))()
 local ThemeManager = loadstring(game:HttpGet(repo .. "addons/ThemeManager.lua"))()
 local SaveManager  = loadstring(game:HttpGet(repo .. "addons/SaveManager.lua"))()
 
+local UIS = game:GetService("UserInputService")
+game:GetService("RunService").RenderStepped:Connect(function()
+    UIS.MouseIconEnabled = true
+end)
+
 getgenv().Library      = Library
 getgenv().ThemeManager = ThemeManager
 getgenv().SaveManager  = SaveManager
