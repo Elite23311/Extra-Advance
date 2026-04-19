@@ -13,31 +13,28 @@ Movement.TPWalkEnabled = false
 Movement.TPWalkSpeed = 100
 Movement.InfiniteJumpEnabled = false
 Movement.RenderConn = nil
-Movement.HumanoidConnection = nil
 
-local function hookHumanoid(humanoid)
-    if not humanoid then return end
-    
-    local original = humanoid.WalkSpeed
-    
-    hookfunction(humanoid, "GetPropertyChangedSignal", function(self, prop)
-        if prop == "WalkSpeed" then
-            task.defer(function()
-                if humanoid and humanoid.Parent then
-                    humanoid.WalkSpeed = Movement.WalkSpeedValue
-                end
-            end)
-        end
-        return original
-    end)
-    
-    humanoid.WalkSpeed = Movement.WalkSpeedValue
-end
+-- ──────────────────────────────────────────
+-- Anti-cheat bypass
+-- ──────────────────────────────────────────
+
+local gmt = getrawmetatable(game)
+setreadonly(gmt, false)
+local oldindex = gmt.__index
+gmt.__index = newcclosure(function(self, b)
+    if b == "JumpPower" then
+        return 50
+    end
+    if b == "WalkSpeed" then
+        return 16
+    end
+    return oldindex(self, b)
+end)
+
+-- ──────────────────────────────────────────
 
 local function setupTPWalk()
     local camera = workspace.CurrentCamera
-    local Players = game:GetService("Players")
-    local LocalPlayer = Players.LocalPlayer
 
     return RunService.RenderStepped:Connect(function()
         if not Movement.TPWalkEnabled or not LocalPlayer.Character or not LocalPlayer.Character:FindFirstChild("HumanoidRootPart") then
@@ -85,7 +82,7 @@ end
 
 function Movement:EnableInfiniteJump()
     self.InfiniteJumpEnabled = true
-    
+
     UserInputService.InputBegan:Connect(function(input, gameProcessed)
         if gameProcessed then return end
         if input.UserInputType == Enum.UserInputType.Keyboard and input.KeyCode == Enum.KeyCode.Space then
@@ -120,16 +117,17 @@ end
 function Movement:Init()
     local char = LocalPlayer.Character
     if char and char:FindFirstChild("Humanoid") then
-        hookHumanoid(char.Humanoid)
+        char.Humanoid.WalkSpeed = self.WalkSpeedValue
+        char.Humanoid.JumpPower = self.JumpPowerValue
     end
 
     LocalPlayer.CharacterAdded:Connect(function(newChar)
         task.wait(0.1)
         if newChar:FindFirstChild("Humanoid") then
-            hookHumanoid(newChar.Humanoid)
+            newChar.Humanoid.WalkSpeed = self.WalkSpeedValue
+            newChar.Humanoid.JumpPower = self.JumpPowerValue
         end
     end)
 end
 
 return Movement
-
