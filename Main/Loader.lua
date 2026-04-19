@@ -59,7 +59,7 @@ getgenv().Window = Window
 -- ──────────────────────────────────────────
 
 local GameRoutes = {
-    [17625359962] = "Games/Rivals/Main.lua",
+    --[17625359962] = "Games/Rivals/Main.lua",
 }
 
 -- ──────────────────────────────────────────
