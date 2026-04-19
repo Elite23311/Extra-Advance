@@ -1,17 +1,40 @@
 -- [[ Universal/Callback/Fly.lua ]] --
+-- CFrame-based movement (no BodyVelocity). Velocity / AssemblyLinearVelocity reads on
+-- HRP are spoofed via Movement:RegisterIndexSpoof (__index chain, same idea as Movement
+-- walk/jump). Instance properties are not Lua functions, so hookfunction is not used here.
 
 local RunService = game:GetService("RunService")
 local Players = game:GetService("Players")
 local UserInputService = game:GetService("UserInputService")
 
 local LocalPlayer = Players.LocalPlayer
-local Fly = {}
 
+local Fly = {}
 Fly.Enabled = false
 Fly.Speed = 50
-Fly.VelocityVector = Vector3.new(0, 0, 0)
 Fly.RenderConn = nil
-Fly.BodyVelocity = nil
+Fly.SpoofRoot = nil
+
+local function velocitySpoofFn(self, key)
+    if not Fly.Enabled or not Fly.SpoofRoot or self ~= Fly.SpoofRoot then
+        return nil
+    end
+    if key == "Velocity" or key == "AssemblyLinearVelocity" then
+        return Vector3.zero
+    end
+    return nil
+end
+
+function Fly:_setSpoofRoot(root)
+    self.SpoofRoot = root
+    local M = self.Movement
+    if not M then return end
+    if root then
+        M:RegisterIndexSpoof("FlyVelocity", velocitySpoofFn)
+    else
+        M:UnregisterIndexSpoof("FlyVelocity")
+    end
+end
 
 function Fly:Start()
     if self.RenderConn then
@@ -26,13 +49,9 @@ function Fly:Start()
     end
 
     local root = char.HumanoidRootPart
-    
-    self.BodyVelocity = Instance.new("BodyVelocity")
-    self.BodyVelocity.Velocity = Vector3.new(0, 0, 0)
-    self.BodyVelocity.MaxForce = Vector3.new(math.huge, math.huge, math.huge)
-    self.BodyVelocity.Parent = root
+    self:_setSpoofRoot(root)
 
-    self.RenderConn = RunService.RenderStepped:Connect(function()
+    self.RenderConn = RunService.RenderStepped:Connect(function(dt)
         if not self.Enabled or not root.Parent then
             self:Stop()
             return
@@ -64,7 +83,10 @@ function Fly:Start()
             moveDir = moveDir.Unit
         end
 
-        self.BodyVelocity.Velocity = moveDir * self.Speed
+        local step = self.Speed * math.clamp(dt, 1 / 240, 1 / 20)
+        if moveDir.Magnitude > 0 then
+            root.CFrame = root.CFrame + moveDir * step
+        end
     end)
 end
 
@@ -73,10 +95,7 @@ function Fly:Stop()
         self.RenderConn:Disconnect()
         self.RenderConn = nil
     end
-    if self.BodyVelocity then
-        self.BodyVelocity:Destroy()
-        self.BodyVelocity = nil
-    end
+    self:_setSpoofRoot(nil)
     self.Enabled = false
 end
 
@@ -85,4 +104,3 @@ function Fly:SetSpeed(speed)
 end
 
 return Fly
-

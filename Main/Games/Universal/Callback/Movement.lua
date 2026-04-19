@@ -7,6 +7,25 @@ local UserInputService = game:GetService("UserInputService")
 local LocalPlayer = Players.LocalPlayer
 local Movement = {}
 
+Movement.IndexSpoofs = {}
+
+function Movement:RegisterIndexSpoof(id, fn)
+    for i = #self.IndexSpoofs, 1, -1 do
+        if self.IndexSpoofs[i].id == id then
+            table.remove(self.IndexSpoofs, i)
+        end
+    end
+    table.insert(self.IndexSpoofs, { id = id, fn = fn })
+end
+
+function Movement:UnregisterIndexSpoof(id)
+    for i = #self.IndexSpoofs, 1, -1 do
+        if self.IndexSpoofs[i].id == id then
+            table.remove(self.IndexSpoofs, i)
+        end
+    end
+end
+
 Movement.WalkSpeedValue = 16
 Movement.JumpPowerValue = 50
 Movement.TPWalkEnabled = false
@@ -22,6 +41,12 @@ local gmt = getrawmetatable(game)
 setreadonly(gmt, false)
 local oldindex = gmt.__index
 gmt.__index = newcclosure(function(self, b)
+    for _, entry in ipairs(Movement.IndexSpoofs) do
+        local ok, spoofed = pcall(entry.fn, self, b)
+        if ok and spoofed ~= nil then
+            return spoofed
+        end
+    end
     if b == "JumpPower" then
         return 50
     end

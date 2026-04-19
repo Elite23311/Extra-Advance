@@ -21,6 +21,7 @@ end
 
 local Fly          = requireModule("Games/Universal/Callback/Fly.lua")
 local Movement     = requireModule("Games/Universal/Callback/Movement.lua")
+local Noclip       = requireModule("Games/Universal/Callback/Noclip.lua")
 local Desync       = requireModule("Games/Universal/Callback/Desync.lua")
 local ESP          = requireModule("Games/Universal/Callback/ESP.lua")
 local Visual       = requireModule("Games/Universal/Callback/Visual.lua")
@@ -29,6 +30,17 @@ local SilentAimbot = requireModule("Games/Universal/Callback/SilentAimbot.lua")
 local Config       = requireModule("Games/Universal/Config.lua")
 
 local IsRaknetSupported = (pcall(function() return Raknet or raknet end)) and (Raknet or raknet) or false
+
+Fly.Movement = Movement
+Noclip.Movement = Movement
+
+Aimbot.MaxTargetDistance = Config.Aimbot.MaxTargetDistance
+Aimbot.ShowFOV = Config.Aimbot.ShowFOV
+Aimbot.TeamCheck = Config.Aimbot.TeamCheck
+Aimbot.InvisibleCheck = Config.Aimbot.InvisibleCheck
+Aimbot.HealthCheck = Config.Aimbot.HealthCheck
+Aimbot.WallCheck = Config.Aimbot.WallCheck
+Aimbot.FOVColor = Config.Aimbot.FOVColor
 
 Movement:Init()
 
@@ -78,6 +90,24 @@ MainBox:AddSlider("UniversalFlySpeed", {
     Callback = function(value)
         Fly:SetSpeed(value)
     end,
+})
+
+MainBox:AddToggle("UniversalNoclip", {
+    Text    = "Noclip (spoofed CanCollide)",
+    Default = false,
+    Callback = function(value)
+        if value then
+            Noclip:Start()
+            Library:Notify("Noclip on", 2)
+        else
+            Noclip:Stop()
+        end
+    end,
+}):AddKeyPicker("UniversalNoclipBind", {
+    Default         = Config.Noclip.Keybind,
+    Text            = "Noclip",
+    Mode            = "Toggle",
+    SyncToggleState = true,
 })
 
 local MovementBox = Tabs.Main:AddRightGroupbox("Movement")
@@ -327,6 +357,46 @@ AimbotBox:AddToggle("UniversalAimbot", {
     SyncToggleState = true,
 })
 
+AimbotBox:AddToggle("UniversalAimbotShowFOV", {
+    Text    = "Show FOV circle",
+    Default = Config.Aimbot.ShowFOV,
+    Callback = function(value)
+        Aimbot:SetConfig("ShowFOV", value)
+    end,
+})
+
+AimbotBox:AddToggle("UniversalAimbotTeamCheck", {
+    Text    = "Team check",
+    Default = Config.Aimbot.TeamCheck,
+    Callback = function(value)
+        Aimbot.TeamCheck = value
+    end,
+})
+
+AimbotBox:AddToggle("UniversalAimbotInvisibleCheck", {
+    Text    = "Invisible check",
+    Default = Config.Aimbot.InvisibleCheck,
+    Callback = function(value)
+        Aimbot.InvisibleCheck = value
+    end,
+})
+
+AimbotBox:AddToggle("UniversalAimbotHealthCheck", {
+    Text    = "Health check",
+    Default = Config.Aimbot.HealthCheck,
+    Callback = function(value)
+        Aimbot.HealthCheck = value
+    end,
+})
+
+AimbotBox:AddToggle("UniversalAimbotWallCheck", {
+    Text    = "Wall check",
+    Default = Config.Aimbot.WallCheck,
+    Callback = function(value)
+        Aimbot.WallCheck = value
+    end,
+})
+
 AimbotBox:AddDropdown("UniversalAimbotMethod", {
     Values  = { "Camera", "RootPart" },
     Default = 1,
@@ -382,13 +452,14 @@ AimbotBox:AddSlider("UniversalAimbotFOVRadius", {
     end,
 })
 
-AimbotBox:AddSlider("UniversalAimbotFOVDistance", {
-    Text     = "FOV Distance",
-    Default  = Config.Aimbot.FOVDistance,
-    Min      = 100,
-    Max      = 1000,
+AimbotBox:AddSlider("UniversalAimbotMaxTargetDistance", {
+    Text     = "Max target distance (studs)",
+    Default  = Config.Aimbot.MaxTargetDistance,
+    Min      = 50,
+    Max      = 2000,
     Rounding = 10,
     Callback = function(value)
+        Aimbot.MaxTargetDistance = value
         Aimbot.FOVDistance = value
     end,
 })
@@ -399,6 +470,12 @@ AimbotBox:AddSlider("UniversalAimbotFOVOutlineTransparency", {
     Min      = 0,
     Max      = 1,
     Rounding = 2,
+    Callback = function(value)
+        Aimbot.FOVOutlineTransparency = value
+        if Aimbot.FOVCircle then
+            Aimbot.FOVCircle.Transparency = value
+        end
+    end,
 })
 
 AimbotBox:AddSlider("UniversalAimbotFOVFillTransparency", {
@@ -407,6 +484,9 @@ AimbotBox:AddSlider("UniversalAimbotFOVFillTransparency", {
     Min      = 0,
     Max      = 1,
     Rounding = 2,
+    Callback = function(value)
+        Aimbot.FOVFillTransparency = value
+    end,
 })
 
 AimbotBox:AddLabel("FOV Color"):AddColorPicker("UniversalAimbotFOVColor", {
@@ -499,6 +579,7 @@ SilentAimbotBox:AddLabel("FOV Color"):AddColorPicker("UniversalSilentAimbotFOVCo
 
 Library:OnUnload(function()
     Fly:Stop()
+    Noclip:Stop()
     Movement:DisableTPWalk()
     Movement:DisableInfiniteJump()
     Desync:Stop()

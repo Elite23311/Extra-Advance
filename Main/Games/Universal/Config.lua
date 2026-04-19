@@ -8,6 +8,10 @@ Config.Fly = {
     Keybind       = "F",
 }
 
+Config.Noclip = {
+    Keybind = "N",
+}
+
 Config.Movement = {
     WalkSpeed     = 16,
     JumpPower     = 50,
@@ -61,6 +65,12 @@ Config.Aimbot = {
     ShotChance    = 100,
     FOVRadius     = 120,
     FOVDistance   = 500,
+    MaxTargetDistance = 500,
+    ShowFOV       = true,
+    TeamCheck     = false,
+    InvisibleCheck = false,
+    HealthCheck   = true,
+    WallCheck     = false,
     FOVOutlineTransparency = 0,
     FOVFillTransparency = 0.5,
     FOVColor      = Color3.fromRGB(255, 255, 255),

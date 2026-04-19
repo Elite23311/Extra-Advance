@@ -59,7 +59,7 @@ getgenv().Window = Window
 -- ──────────────────────────────────────────
 
 local GameRoutes = {
-    --[17625359962] = "Games/Rivals/Main.lua",
+    [17625359962] = "Games/Rivals/Main.lua",
 }
 
 -- ──────────────────────────────────────────
@@ -93,7 +93,7 @@ MenuGroup:AddLabel("Menu Keybind"):AddKeyPicker("MenuKeybind", {
     Text    = "Toggle Menu",
 })
 
-Library.ToggleKeybind = Options.MenuKeybind
+Library.ToggleKeybind = getgenv().Options.MenuKeybind
 
 ThemeManager:SetLibrary(Library)
 SaveManager:SetLibrary(Library)
