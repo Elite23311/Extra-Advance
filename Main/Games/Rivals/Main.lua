@@ -70,7 +70,7 @@ RivalsBox:AddSlider("RivalsAimSmooth", {
 })
 
 RivalsBox:AddDropdown("RivalsAimPart", {
-    Values  = { "Head", "HumanoidRootPart", "UpperTorso", "LowerTorso" },
+    Values  = { "Head", "HumanoidRootPart" },
     Default = 1,
     Text    = "Target Part",
     Callback = function(value)

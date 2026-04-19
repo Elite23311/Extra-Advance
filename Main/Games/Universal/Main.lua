@@ -30,7 +30,6 @@ local Config       = requireModule("Games/Universal/Config.lua")
 
 local IsRaknetSupported = (pcall(function() return Raknet or raknet end)) and (Raknet or raknet) or false
 
--- Initialize movement first
 Movement:Init()
 
 -- ──────────────────────────────────────────
@@ -38,9 +37,9 @@ Movement:Init()
 -- ──────────────────────────────────────────
 
 local Tabs = {
-    Main         = Window:AddTab("Main"),
-    Visual       = Window:AddTab("Visual"),
-    Player       = Window:AddTab("Player"),
+    Main   = Window:AddTab("Main"),
+    Visual = Window:AddTab("Visual"),
+    Player = Window:AddTab("Player"),
 }
 
 getgenv().Tabs = Tabs
@@ -154,7 +153,6 @@ if IsRaknetSupported then
             end
         end,
     })
-
     DesyncBox:AddLabel("Keybind: U to toggle"):AddKeyPicker("UniversalDesyncBind", {
         Default = Config.Desync.Keybind,
         NoUI    = true,
@@ -186,9 +184,8 @@ ESPBox:AddToggle("UniversalESPChams", {
     end,
 })
 
-ESPBox:AddColorPicker("UniversalESPChamsColor", {
+ESPBox:AddLabel("Chams Color"):AddColorPicker("UniversalESPChamsColor", {
     Default  = Config.ESP.ChamsColor,
-    Title    = "Chams Color",
     Callback = function(value)
         ESP.Options.ChamsColor = value
     end,
@@ -202,9 +199,8 @@ ESPBox:AddToggle("UniversalESPBox", {
     end,
 })
 
-ESPBox:AddColorPicker("UniversalESPBoxColor", {
+ESPBox:AddLabel("Box Color"):AddColorPicker("UniversalESPBoxColor", {
     Default  = Config.ESP.BoxColor,
-    Title    = "Box Color",
     Callback = function(value)
         ESP.Options.BoxColor = value
     end,
@@ -412,9 +408,8 @@ AimbotBox:AddSlider("UniversalAimbotFOVFillTransparency", {
     Rounding = 2,
 })
 
-AimbotBox:AddColorPicker("UniversalAimbotFOVColor", {
+AimbotBox:AddLabel("FOV Color"):AddColorPicker("UniversalAimbotFOVColor", {
     Default  = Config.Aimbot.FOVColor,
-    Title    = "FOV Color",
     Callback = function(value)
         if Aimbot.FOVCircle then Aimbot.FOVCircle.Color = value end
     end,
@@ -493,9 +488,8 @@ SilentAimbotBox:AddSlider("UniversalSilentAimbotFOVFillTransparency", {
     Rounding = 2,
 })
 
-SilentAimbotBox:AddColorPicker("UniversalSilentAimbotFOVColor", {
+SilentAimbotBox:AddLabel("FOV Color"):AddColorPicker("UniversalSilentAimbotFOVColor", {
     Default = Config.SilentAimbot.FOVColor,
-    Title   = "FOV Color",
 })
 
 -- ──────────────────────────────────────────
