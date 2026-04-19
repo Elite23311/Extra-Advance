@@ -32,7 +32,11 @@ local Config       = requireModule("Games/Universal/Config.lua")
 local IsRaknetSupported = (pcall(function() return Raknet or raknet end)) and (Raknet or raknet) or false
 
 Fly.Movement = Movement
-Noclip.Movement = Movement
+
+-- Spoofing is not implemented in this file (UI only). WalkSpeed / JumpPower read-spoof
+-- lives in Callback/Movement.lua (game.__index). Fly uses CFrame (no BodyVelocity); HRP
+-- Velocity / AssemblyLinearVelocity reads are spoofed in Callback/Fly.lua via
+-- Movement:RegisterIndexSpoof.
 
 Aimbot.MaxTargetDistance = Config.Aimbot.MaxTargetDistance
 Aimbot.ShowFOV = Config.Aimbot.ShowFOV
@@ -93,7 +97,7 @@ MainBox:AddSlider("UniversalFlySpeed", {
 })
 
 MainBox:AddToggle("UniversalNoclip", {
-    Text    = "Noclip (spoofed CanCollide)",
+    Text    = "Noclip",
     Default = false,
     Callback = function(value)
         if value then

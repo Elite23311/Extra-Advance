@@ -34,7 +34,8 @@ Movement.InfiniteJumpEnabled = false
 Movement.RenderConn = nil
 
 -- ──────────────────────────────────────────
--- Anti-cheat bypass
+-- Read spoof: WalkSpeed / JumpPower __index returns vanilla (16 / 50) while real Humanoid
+-- values are still written by SetWalkSpeed / SetJumpPower below.
 -- ──────────────────────────────────────────
 
 local gmt = getrawmetatable(game)

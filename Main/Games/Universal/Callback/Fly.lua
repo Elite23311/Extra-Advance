@@ -1,7 +1,7 @@
 -- [[ Universal/Callback/Fly.lua ]] --
--- CFrame-based movement (no BodyVelocity). Velocity / AssemblyLinearVelocity reads on
--- HRP are spoofed via Movement:RegisterIndexSpoof (__index chain, same idea as Movement
--- walk/jump). Instance properties are not Lua functions, so hookfunction is not used here.
+-- CFrame-based movement (no BodyVelocity — nothing to spoof on a BodyVelocity instance).
+-- HumanoidRootPart Velocity / AssemblyLinearVelocity *reads* are spoofed to Vector3.zero
+-- via Movement:RegisterIndexSpoof (same __index chain as Movement.lua walk/jump reads).
 
 local RunService = game:GetService("RunService")
 local Players = game:GetService("Players")

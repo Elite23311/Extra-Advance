@@ -1,6 +1,6 @@
 -- [[ Universal/Callback/Noclip.lua ]] --
--- Parts have CanCollide = false for movement; reads of CanCollide on the local
--- character are spoofed to true via Movement:RegisterIndexSpoof (same as Fly velocity).
+-- Classic noclip: character BaseParts get CanCollide = false each frame.
+-- No __index / read spoofing (avoids metatable conflicts with Movement).
 
 local Players = game:GetService("Players")
 local RunService = game:GetService("RunService")
@@ -9,33 +9,13 @@ local LocalPlayer = Players.LocalPlayer
 
 local Noclip = {}
 Noclip.Enabled = false
-Noclip.Movement = nil
 Noclip.RenderConn = nil
-
-local function canCollideSpoofFn(self, key)
-    if not Noclip.Enabled or key ~= "CanCollide" then
-        return nil
-    end
-    if typeof(self) ~= "Instance" or not self:IsA("BasePart") then
-        return nil
-    end
-    local char = LocalPlayer.Character
-    if not char or not self:IsDescendantOf(char) then
-        return nil
-    end
-    return true
-end
 
 function Noclip:Start()
     if self.RenderConn then
         return
     end
     self.Enabled = true
-    local M = self.Movement
-    if M then
-        M:RegisterIndexSpoof("NoclipCanCollide", canCollideSpoofFn)
-    end
-
     self.RenderConn = RunService.RenderStepped:Connect(function()
         if not self.Enabled then
             return
@@ -57,10 +37,6 @@ function Noclip:Stop()
     if self.RenderConn then
         self.RenderConn:Disconnect()
         self.RenderConn = nil
-    end
-    local M = self.Movement
-    if M then
-        M:UnregisterIndexSpoof("NoclipCanCollide")
     end
     local char = LocalPlayer.Character
     if char then
