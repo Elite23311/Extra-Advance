@@ -62,6 +62,10 @@ MainBox:AddToggle("UniversalFly", {
             Fly:Stop()
         end
     end,
+}):AddKeyPicker("UniversalFlyBind", {
+    Default = Config.Fly.Keybind,
+    Text    = "Fly",
+    Mode    = "Toggle",
 })
 
 MainBox:AddSlider("UniversalFlySpeed", {
@@ -73,11 +77,6 @@ MainBox:AddSlider("UniversalFlySpeed", {
     Callback = function(value)
         Fly:SetSpeed(value)
     end,
-})
-
-MainBox:AddLabel("Keybind: F to toggle"):AddKeyPicker("UniversalFlyBind", {
-    Default = Config.Fly.Keybind,
-    NoUI    = true,
 })
 
 local MovementBox = Tabs.Main:AddRightGroupbox("Movement")
@@ -152,10 +151,10 @@ if IsRaknetSupported then
                 Desync:Stop()
             end
         end,
-    })
-    DesyncBox:AddLabel("Keybind: U to toggle"):AddKeyPicker("UniversalDesyncBind", {
+    }):AddKeyPicker("UniversalDesyncBind", {
         Default = Config.Desync.Keybind,
-        NoUI    = true,
+        Text    = "Desync",
+        Mode    = "Toggle",
     })
 else
     DesyncBox:AddLabel(getexecutorname() .. " doesn't support Raknet.")
@@ -288,6 +287,10 @@ VisualBox:AddToggle("UniversalXRay", {
     Callback = function(value)
         if value then Visual:EnableXRay() else Visual:DisableXRay() end
     end,
+}):AddKeyPicker("UniversalXRayBind", {
+    Default = Config.XRay.Keybind,
+    Text    = "X-Ray",
+    Mode    = "Toggle",
 })
 
 VisualBox:AddSlider("UniversalXRayTransparency", {
@@ -299,11 +302,6 @@ VisualBox:AddSlider("UniversalXRayTransparency", {
     Callback = function(value)
         Visual:SetXRayTransparency(value)
     end,
-})
-
-VisualBox:AddLabel("Keybind: X to toggle"):AddKeyPicker("UniversalXRayBind", {
-    Default = Config.XRay.Keybind,
-    NoUI    = true,
 })
 
 -- ──────────────────────────────────────────
@@ -319,11 +317,10 @@ AimbotBox:AddToggle("UniversalAimbot", {
         Aimbot.Enabled = value
         if value then Aimbot:Start() else Aimbot:Stop() end
     end,
-})
-
-AimbotBox:AddLabel("Hold Keybind"):AddKeyPicker("UniversalAimbotBind", {
+}):AddKeyPicker("UniversalAimbotBind", {
     Default = Config.Aimbot.Keybind,
-    NoUI    = true,
+    Text    = "Aimbot",
+    Mode    = "Hold",
 })
 
 AimbotBox:AddDropdown("UniversalAimbotMethod", {

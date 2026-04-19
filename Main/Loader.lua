@@ -45,6 +45,8 @@ local Window = Library:CreateWindow({
     MenuFadeTime = 0.2,
 })
 
+Library.ShowCustomCursor = false
+
 getgenv().Window = Window
 
 -- ──────────────────────────────────────────
