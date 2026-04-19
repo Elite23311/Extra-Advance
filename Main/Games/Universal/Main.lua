@@ -63,9 +63,10 @@ MainBox:AddToggle("UniversalFly", {
         end
     end,
 }):AddKeyPicker("UniversalFlyBind", {
-    Default = Config.Fly.Keybind,
-    Text    = "Fly",
-    Mode    = "Toggle",
+    Default         = Config.Fly.Keybind,
+    Text            = "Fly",
+    Mode            = "Toggle",
+    SyncToggleState = true,
 })
 
 MainBox:AddSlider("UniversalFlySpeed", {
@@ -152,9 +153,10 @@ if IsRaknetSupported then
             end
         end,
     }):AddKeyPicker("UniversalDesyncBind", {
-        Default = Config.Desync.Keybind,
-        Text    = "Desync",
-        Mode    = "Toggle",
+        Default         = Config.Desync.Keybind,
+        Text            = "Desync",
+        Mode            = "Toggle",
+        SyncToggleState = true,
     })
 else
     DesyncBox:AddLabel(getexecutorname() .. " doesn't support Raknet.")
@@ -288,9 +290,10 @@ VisualBox:AddToggle("UniversalXRay", {
         if value then Visual:EnableXRay() else Visual:DisableXRay() end
     end,
 }):AddKeyPicker("UniversalXRayBind", {
-    Default = Config.XRay.Keybind,
-    Text    = "X-Ray",
-    Mode    = "Toggle",
+    Default         = Config.XRay.Keybind,
+    Text            = "X-Ray",
+    Mode            = "Toggle",
+    SyncToggleState = true,
 })
 
 VisualBox:AddSlider("UniversalXRayTransparency", {
@@ -318,9 +321,10 @@ AimbotBox:AddToggle("UniversalAimbot", {
         if value then Aimbot:Start() else Aimbot:Stop() end
     end,
 }):AddKeyPicker("UniversalAimbotBind", {
-    Default = Config.Aimbot.Keybind,
-    Text    = "Aimbot",
-    Mode    = "Hold",
+    Default         = Config.Aimbot.Keybind,
+    Text            = "Aimbot",
+    Mode            = "Hold",
+    SyncToggleState = true,
 })
 
 AimbotBox:AddDropdown("UniversalAimbotMethod", {
@@ -504,7 +508,6 @@ Library:OnUnload(function()
     Visual:DisableFPSBoost()
     Aimbot:Stop()
     SilentAimbot:Stop()
-    Library:Notify("Script cleanly unloaded.", 3)
 end)
 
 Library:Notify("Universal Script loaded.", 3)
