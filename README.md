@@ -49,6 +49,7 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/Elite23311/Extra-Adva
 ```ini
 [ISSUE] 2 | Crash shortly after inject :
 ```
+
 > **Install Fishstrap, if u don't have - [Download Fishstrap](https://fishstrap.app)**
 > **Then Go to `Fishstraps Settings` and then to `FastFlags` and change the Rendering mode to `Direct3D 11`**
 > **After Download These ⬇**
@@ -60,22 +61,28 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/Elite23311/Extra-Adva
 ```ini
 [ISSUE] 3 | Could not Inject: Roblox Version Mismatch :
 ```
-> **Install [Roblox LIVE Version](https://rdd.weao.gg/?channel=LIVE&binaryType=WindowsPlayer&version=version-6776addb8fbc4d17).**
+
+> **Install [Roblox LIVE Version](https://scriptwatch0.vercel.app/Type=Windows/version=LIVE/).**
 > **Extract it to a folder, then launch RobloxPlayerBeta from that folder.**
 
 ```ini
 [ISSUE] 4 | ERR_SIGNATURE / Error with signature :
 ```
-> **Go to Windows Settings -> Time -> Sync Clock/Time.**
+
+> **Make sure ur windows/pc timestamp is the same as ur irl time & location**
+> **Go to windows setting > time & language > time & date > press "set time automatically" (make sure to press "sync now")**
+> **enable & disable the "set time automatically" if it's already enabled!**
 
 ```INI
 [ISSUE] 5 | Module checksum mismatch :
 ```
+
 > **Go to [Download Yub-X DLL](https://cdn.yub-x.net/yubx.dll) and replace the dll with this in the bin folder.**
 
 ```ini
 [ISSUE] 6 | Fix Injection failed on client (0) :
 ```
+
 **Download These ⬇**
    
 **[Visual C++ Runtimes x64](https://download.visualstudio.microsoft.com/download/pr/6f02464a-5e9b-486d-a506-c99a17db9a83/8995548DFFFCDE7C49987029C764355612BA6850EE09A7B6F0FDDC85BDC5C280/VC_redist.x64.exe)**
@@ -85,27 +92,31 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/Elite23311/Extra-Adva
 ```ini
 [ISSUE] 7 | Injector not Working :
 ```
+
 >    **Go To [Download Yub-X Injector](https://cdn.yub-x.net/injector.exe) and put in bin folder**
 
 ```ini
 [ISSUE] 8 | The injector hasn't opened, please try disabling your Anti-Virus :
 ```
+
 >    **Go To [Download Yub-X Injector](https://cdn.yub-x.net/injector.exe) [Yub-X DLL](https://cdn.yub-x.net/yubx.dll) and put in bin folder**
 > How to open bin folder?
 
 > **Open Yub-X**
 > Click ⋯ (three dots) in explorer/sidebar,
-> Open bin folder,
+> Open bin folder, delete old yubx.dll and injector.exe, replace with new one that you downloaded them from our site.
 
 ```ini
 [ISSUE] 9 | Auto-Update Loop (Opening, closing, opening...) :
 ```
+
 >    **Disable your Anti-Virus and restart your PC if needed!**
 
 ```ini
 
 [ISSUE] 10 | Suspicious... :
 ```
+
 > **Delete the yubx & YuB-X.com.UI folders from here:**
 
 > `%appdata%` | **%appdata%\com.YUB-X.ui**
@@ -119,33 +130,43 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/Elite23311/Extra-Adva
 
 [ISSUE] 11 | Session Invalid - Key already in use :
 ```
+
 > **Update to the latest version from [Official Source](https://yub-x.net/)**
 
 ```ini
 
 [ISSUE] 12 | Integrity check failed :
 ```
+
 > **Use VPN - https://1.1.1.1 **
 
 ```ini
 
 [ISSUE] 13 | JSON parse error: XXX :
 ```
+
 > **Use VPN - https://1.1.1.1 **
 
 ```ini
 
-[ISSUE] 14 | Stuck on Initializing gateway in new Key system :
+[ISSUE] 14-15 | Stuck on Initializing gateway in new Key system, Proxy issue from work.ink/Key System :
 ```
 
 - Guide By STX
 
-> **Go to Windows Settings -> Time -> Sync Clock/Time.**
-> **Refresh the site to fix redirect work.ink**
+> **Make sure ur windows/pc timestamp is the same as ur irl time & location**
+> **Go to windows setting > time & language > time & date > press "set time automatically" (make sure to press "sync now")**
+> **enable & disable the "set time automatically" if it's already enabled!**
+> **Hard Refresh (Shift + Ctrl + R) the site to fix redirect work.ink**
+
+> **Verify your discord account from Key system. If it wont work, try to use other browser**
+> **OR use https://yub-x.space/get_key/ for working key system backup. We'll find guide for initializing issue, please wait.**
+
+> **Disable your Proxy/VPN/Backend Tool that uses vpn feature then refresh site or use Other Browsers.**
 
 ```ini
 
-[ISSUE] 15 | Stuck on Opera Ads :
+[ISSUE] 16 | Stuck on Opera Ads :
 ```
 
 > **Method 1: Use Opera browser on work.ink**
@@ -161,6 +182,36 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/Elite23311/Extra-Adva
 8. Wait **1-2 minutes**
 9. Come back to your work.ink tab again **After** 1-2 minutes (the time is random btw)
 -# The tab runs in the background and so you don't have to install anything lol
+
+```ini
+
+[ISSUE] 17 | .rar is Notepad file :
+```
+
+> **Download winRAR from [Official winRAR Download](https://www.win-rar.com/download.html)**
+> **after downloaded, go to file explorer and right click YUB-X-UI.rar and Open with winRAR**
+> **then Extract it and done!**
+
+```ini
+
+[ISSUE] 18 | Raknet not working :
+```
+
+> **Open Yub X and click setting then Click Behaviour, Enable Raknet Library**
+> **Click Proceed at warning panel then inject into game**
+> **OR rejoin game to get raknet library working**
+
+```ini
+
+[ISSUE] 19 | Injection timed out: injector ran but pipe was never detected. Check your Anti-Virus :
+```
+
+>    **Go To [Download Yub-X Injector](https://cdn.yub-x.net/injector.exe) [Yub-X DLL](https://cdn.yub-x.net/yubx.dll) and put in bin folder**
+> How to open bin folder?
+
+> **Open Yub-X**
+> Click ⋯ (three dots) in explorer/sidebar,
+> Open bin folder, delete old yubx.dll and injector.exe, replace with new one that you downloaded them from our site.
 
 ## Ronix Windows:
 
